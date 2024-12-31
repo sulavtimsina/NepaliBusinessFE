@@ -23,7 +23,7 @@ class Login extends StatelessWidget {
         children: [
           Container(
             width: screenWidth,
-            height: screenHeight * 0.3,
+            height: screenHeight * 0.25,
             color: Colors.white,
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -173,16 +173,16 @@ class Login extends StatelessWidget {
                         onTap: () {},
                         child: Image.asset(
                           'assets/search.png',
-                          width: screenWidth * 0.15,
-                          height: screenHeight * 0.15,
+                          width: screenWidth * 0.2,
+                          height: screenHeight * 0.2,
                         ),
                       ),
                       GestureDetector(
                         onTap: () {},
                         child: Image.asset(
                           'assets/facebook.png',
-                          width: screenWidth * 0.15,
-                          height: screenHeight * 0.15,
+                          width: screenWidth * 0.2,
+                          height: screenHeight * 0.2,
                         ),
                       ),
                     ],

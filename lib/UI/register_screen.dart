@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:nepaliapp/UI/login_screen.dart';
 import 'package:nepaliapp/utils/utils.dart';
 
 class RegisterScreen extends StatelessWidget {
@@ -22,7 +23,7 @@ class RegisterScreen extends StatelessWidget {
         children: [
           Container(
             width: screenWidth,
-            height: screenHeight * 0.2,
+            height: screenHeight * 0.25,
             color: Colors.white,
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -166,8 +167,14 @@ class RegisterScreen extends StatelessWidget {
                     ),
                   ),
                   const SizedBox(height: 16),
-                  const InkWell(
-                    child: Text(
+                  InkWell(
+                    onTap: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const Login()));
+                    },
+                    child: const Text(
                       'Already Have Account? Login',
                       style: TextStyle(fontSize: 16, color: Color(0xff114c2b)),
                     ),
