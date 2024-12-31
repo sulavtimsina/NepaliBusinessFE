@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:nepaliapp/UI/register_screen.dart';
 import 'package:nepaliapp/utils/utils.dart';
 
 class Login extends StatelessWidget {
@@ -90,13 +91,12 @@ class Login extends StatelessWidget {
                       ),
                     ),
                   ),
-                  const SizedBox(height: 16),
+                  const SizedBox(height: 14),
                   SizedBox(
                     width: screenWidth * 0.85,
                     child: TextField(
-                      // controller: loginController.passwordController,
                       keyboardType: TextInputType.text,
-
+                      obscureText: true,
                       decoration: InputDecoration(
                         labelText: 'Password',
                         labelStyle: TextStyle(color: utils.secondaryColor),
@@ -116,21 +116,56 @@ class Login extends StatelessWidget {
                       ),
                     ),
                   ),
-                  const SizedBox(height: 16),
-                  const InkWell(
-                    child: Text(
-                      'Forget Password?',
-                      style: TextStyle(fontSize: 18, color: Color(0xff114c2b)),
-                    ),
-                  ),
                   const SizedBox(height: 14),
                   const InkWell(
                     child: Text(
-                      'New Here? Register Now',
-                      style: TextStyle(fontSize: 18, color: Color(0xff114c2b)),
+                      'Forget Password?',
+                      style: TextStyle(fontSize: 16, color: Color(0xff114c2b)),
                     ),
                   ),
-                  const SizedBox(height: 16),
+                  const SizedBox(height: 12),
+                  InkWell(
+                    onTap: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const RegisterScreen()));
+                    },
+                    child: const Text(
+                      'New Here? Register Now',
+                      style: TextStyle(fontSize: 16, color: Color(0xff114c2b)),
+                    ),
+                  ),
+                  const SizedBox(height: 14),
+                  const Center(
+                    child: Row(
+                      children: [
+                        // Left line
+                        Expanded(
+                          child: Divider(
+                            thickness: 1,
+                            color: Colors.grey,
+                          ),
+                        ),
+                        // Text in the middle
+                        Padding(
+                          padding: EdgeInsets.symmetric(horizontal: 10.0),
+                          child: Text(
+                            "or login with",
+                            style: TextStyle(color: Colors.grey),
+                          ),
+                        ),
+                        // Right line
+                        Expanded(
+                          child: Divider(
+                            thickness: 1,
+                            color: Colors.grey,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  const SizedBox(height: 12),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
@@ -138,25 +173,25 @@ class Login extends StatelessWidget {
                         onTap: () {},
                         child: Image.asset(
                           'assets/search.png',
-                          width: screenWidth * 0.2,
-                          height: screenHeight * 0.2,
+                          width: screenWidth * 0.15,
+                          height: screenHeight * 0.15,
                         ),
                       ),
                       GestureDetector(
                         onTap: () {},
                         child: Image.asset(
                           'assets/facebook.png',
-                          width: screenWidth * 0.2,
-                          height: screenHeight * 0.2,
+                          width: screenWidth * 0.15,
+                          height: screenHeight * 0.15,
                         ),
                       ),
                     ],
                   ),
                   const SizedBox(
-                    height: 16,
+                    height: 10,
                   ),
                   SizedBox(
-                    height: 50,
+                    height: 45,
                     width: screenWidth * 0.85,
                     child: ElevatedButton(
                       style: ElevatedButton.styleFrom(
@@ -171,7 +206,7 @@ class Login extends StatelessWidget {
                         style: TextStyle(
                             color: Color(0xff114c2b),
                             fontWeight: FontWeight.bold,
-                            fontSize: 18),
+                            fontSize: 16),
                       ),
                     ),
                   )
