@@ -7,6 +7,9 @@ class Utils {
   final secondaryColor = const Color(0xff114c2b);
   final halfScreenColor = const Color(0xfff4f4f4);
   final standardColor = Colors.black;
+  final navtextcolor = Colors.white;
+  final tabBackgroundColor = Colors.grey.shade800;
+
   final String name = 'Easebuz';
   String get greeting => "Welcome to $name";
   String get loginPageText => "Login below to find business near you";

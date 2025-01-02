@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:nepaliapp/controller/authcontroller.dart/reset_password_controller.dart';
+import 'package:nepaliapp/controller/authcontroller/reset_password_controller.dart';
 import 'package:nepaliapp/utils/utils.dart';
 
 class ForgetPassword extends StatelessWidget {

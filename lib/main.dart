@@ -1,8 +1,8 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:nepaliapp/UI/login_screen.dart';
 import 'package:nepaliapp/routes/routes.dart';
+import 'package:nepaliapp/screen/auth%20UI/login_screen.dart';
 import 'package:nepaliapp/utils/utils.dart';
 
 void main() async {

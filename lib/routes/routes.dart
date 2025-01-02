@@ -1,9 +1,9 @@
 import 'package:get/get.dart';
-import 'package:nepaliapp/UI/forget_password.dart';
-import 'package:nepaliapp/UI/home.dart';
-import 'package:nepaliapp/UI/login_screen.dart';
-import 'package:nepaliapp/UI/register_screen.dart';
+import 'package:nepaliapp/screen/auth%20UI/forget_password.dart';
+import 'package:nepaliapp/screen/auth%20UI/login_screen.dart';
+import 'package:nepaliapp/screen/auth%20UI/register_screen.dart';
 
+import '../screen/dashboard UI/home.dart';
 import 'route_names.dart';
 
 class AppRoutes {

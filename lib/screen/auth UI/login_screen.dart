@@ -1,22 +1,23 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:nepaliapp/controller/authcontroller.dart/register_controller.dart';
+import 'package:nepaliapp/controller/authcontroller/login_controller.dart';
 import 'package:nepaliapp/utils/utils.dart';
 
-class RegisterScreen extends StatelessWidget {
-  const RegisterScreen({super.key});
+class Login extends StatelessWidget {
+  const Login({super.key});
 
   @override
   Widget build(BuildContext context) {
     final screenSize = MediaQuery.of(context).size;
     final screenWidth = screenSize.width;
     final screenHeight = screenSize.height;
-    final RegisterController registerController = Get.put(RegisterController());
+    final LoginController loginController = Get.put(LoginController());
+    String? _errorMsg;
     final Utils utils = Utils();
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Register'),
+        title: const Text('Login'),
         centerTitle: true,
         backgroundColor: utils.primaryColor,
       ),
@@ -54,7 +55,7 @@ class RegisterScreen extends StatelessWidget {
                     height: 5,
                   ),
                   Text(
-                    utils.registerPageText,
+                    utils.loginPageText,
                     style: TextStyle(
                         color: utils.secondaryColor,
                         fontWeight: FontWeight.normal,
@@ -73,41 +74,15 @@ class RegisterScreen extends StatelessWidget {
                   SizedBox(
                     width: screenWidth * 0.85,
                     child: TextField(
-                      controller: registerController.nameController,
-                      keyboardType: TextInputType.emailAddress,
-                      decoration: InputDecoration(
-                        labelText: 'Name',
-                        labelStyle: TextStyle(color: utils.secondaryColor),
-                        hintText: 'Name',
-                        hintStyle: TextStyle(color: utils.secondaryColor),
-                        prefixIcon: const Icon(CupertinoIcons.person),
-                        filled: true,
-                        fillColor: Colors.white,
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(10),
-                          borderSide: const BorderSide(color: Colors.grey),
-                        ),
-                        focusedBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(10),
-                          borderSide: const BorderSide(
-                              color: Color.fromARGB(255, 11, 49, 13)),
-                        ),
-                      ),
-                    ),
-                  ),
-                  const SizedBox(height: 12),
-                  SizedBox(
-                    width: screenWidth * 0.85,
-                    child: TextField(
-                      controller: registerController.emailController,
+                      controller: loginController.emailController,
                       keyboardType: TextInputType.emailAddress,
                       decoration: InputDecoration(
                         labelText: 'Email',
                         labelStyle: TextStyle(color: utils.secondaryColor),
                         hintText: 'Email',
                         hintStyle: TextStyle(color: utils.secondaryColor),
-                        prefixIcon: const Icon(CupertinoIcons.mail_solid),
                         filled: true,
+                        prefixIcon: const Icon(CupertinoIcons.mail_solid),
                         fillColor: Colors.white,
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(10),
@@ -121,14 +96,14 @@ class RegisterScreen extends StatelessWidget {
                       ),
                     ),
                   ),
-                  const SizedBox(height: 12),
+                  const SizedBox(height: 14),
                   SizedBox(
                       width: screenWidth * 0.85,
                       child: Obx(() {
                         return TextField(
-                          controller: registerController.passwordController,
+                          controller: loginController.passwordController,
                           keyboardType: TextInputType.text,
-                          obscureText: registerController.visiblePassword.value,
+                          obscureText: loginController.visiblePassword.value,
                           decoration: InputDecoration(
                             labelText: 'Password',
                             labelStyle: TextStyle(color: utils.secondaryColor),
@@ -136,19 +111,19 @@ class RegisterScreen extends StatelessWidget {
                             hintStyle: TextStyle(color: utils.secondaryColor),
                             filled: true,
                             prefixIcon: const Icon(CupertinoIcons.lock_fill),
+                            errorText: _errorMsg,
                             suffixIcon: IconButton(
                                 onPressed: () {
-                                  registerController.visiblePassword.value =
-                                      !registerController.visiblePassword.value;
+                                  loginController.visiblePassword.value =
+                                      !loginController.visiblePassword.value;
                                 },
                                 icon: Icon(
-                                  registerController.visiblePassword.value
+                                  loginController.visiblePassword.value
                                       ? Icons.visibility_off
                                       : Icons.visibility,
-                                  color:
-                                      registerController.visiblePassword.value
-                                          ? Colors.grey.shade500
-                                          : utils.secondaryColor,
+                                  color: loginController.visiblePassword.value
+                                      ? Colors.grey.shade500
+                                      : utils.secondaryColor,
                                 )),
                             fillColor: Colors.white,
                             border: OutlineInputBorder(
@@ -163,17 +138,27 @@ class RegisterScreen extends StatelessWidget {
                           ),
                         );
                       })),
-                  const SizedBox(height: 16),
+                  const SizedBox(height: 14),
                   InkWell(
                     onTap: () {
-                      Get.toNamed('/loginScreen');
+                      Get.toNamed('/forgetScreen');
                     },
                     child: const Text(
-                      'Already Have Account? Login',
+                      'Forget Password?',
                       style: TextStyle(fontSize: 16, color: Color(0xff114c2b)),
                     ),
                   ),
-                  const SizedBox(height: 16),
+                  const SizedBox(height: 12),
+                  InkWell(
+                    onTap: () {
+                      Get.toNamed('/registerScreen');
+                    },
+                    child: const Text(
+                      'New Here? Register Now',
+                      style: TextStyle(fontSize: 16, color: Color(0xff114c2b)),
+                    ),
+                  ),
+                  const SizedBox(height: 14),
                   const Center(
                     child: Row(
                       children: [
@@ -199,6 +184,7 @@ class RegisterScreen extends StatelessWidget {
                       ],
                     ),
                   ),
+                  const SizedBox(height: 12),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
@@ -233,15 +219,15 @@ class RegisterScreen extends StatelessWidget {
                         ),
                         backgroundColor: utils.primaryColor,
                       ),
-                      onPressed: registerController.isLoading.value
+                      onPressed: loginController.isLoading.value
                           ? null
-                          : registerController.signUpAndSaveToFirestore,
-                      child: Obx(() => registerController.isLoading.value
+                          : loginController.signInWithEmailAndPassword,
+                      child: Obx(() => loginController.isLoading.value
                           ? CircularProgressIndicator(
                               color: utils.secondaryColor,
                             )
                           : Text(
-                              'Register',
+                              'Login',
                               style: TextStyle(
                                   color: utils.secondaryColor,
                                   fontWeight: FontWeight.bold),

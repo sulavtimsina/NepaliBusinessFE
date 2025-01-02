@@ -1,23 +1,22 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:nepaliapp/controller/authcontroller.dart/login_controller.dart';
+import 'package:nepaliapp/controller/authcontroller/register_controller.dart';
 import 'package:nepaliapp/utils/utils.dart';
 
-class Login extends StatelessWidget {
-  const Login({super.key});
+class RegisterScreen extends StatelessWidget {
+  const RegisterScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
     final screenSize = MediaQuery.of(context).size;
     final screenWidth = screenSize.width;
     final screenHeight = screenSize.height;
-    final LoginController loginController = Get.put(LoginController());
-    String? _errorMsg;
+    final RegisterController registerController = Get.put(RegisterController());
     final Utils utils = Utils();
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Login'),
+        title: const Text('Register'),
         centerTitle: true,
         backgroundColor: utils.primaryColor,
       ),
@@ -55,7 +54,7 @@ class Login extends StatelessWidget {
                     height: 5,
                   ),
                   Text(
-                    utils.loginPageText,
+                    utils.registerPageText,
                     style: TextStyle(
                         color: utils.secondaryColor,
                         fontWeight: FontWeight.normal,
@@ -74,15 +73,15 @@ class Login extends StatelessWidget {
                   SizedBox(
                     width: screenWidth * 0.85,
                     child: TextField(
-                      controller: loginController.emailController,
+                      controller: registerController.nameController,
                       keyboardType: TextInputType.emailAddress,
                       decoration: InputDecoration(
-                        labelText: 'Email',
+                        labelText: 'Name',
                         labelStyle: TextStyle(color: utils.secondaryColor),
-                        hintText: 'Email',
+                        hintText: 'Name',
                         hintStyle: TextStyle(color: utils.secondaryColor),
+                        prefixIcon: const Icon(CupertinoIcons.person),
                         filled: true,
-                        prefixIcon: const Icon(CupertinoIcons.mail_solid),
                         fillColor: Colors.white,
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(10),
@@ -96,14 +95,40 @@ class Login extends StatelessWidget {
                       ),
                     ),
                   ),
-                  const SizedBox(height: 14),
+                  const SizedBox(height: 12),
+                  SizedBox(
+                    width: screenWidth * 0.85,
+                    child: TextField(
+                      controller: registerController.emailController,
+                      keyboardType: TextInputType.emailAddress,
+                      decoration: InputDecoration(
+                        labelText: 'Email',
+                        labelStyle: TextStyle(color: utils.secondaryColor),
+                        hintText: 'Email',
+                        hintStyle: TextStyle(color: utils.secondaryColor),
+                        prefixIcon: const Icon(CupertinoIcons.mail_solid),
+                        filled: true,
+                        fillColor: Colors.white,
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(10),
+                          borderSide: const BorderSide(color: Colors.grey),
+                        ),
+                        focusedBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(10),
+                          borderSide: const BorderSide(
+                              color: Color.fromARGB(255, 11, 49, 13)),
+                        ),
+                      ),
+                    ),
+                  ),
+                  const SizedBox(height: 12),
                   SizedBox(
                       width: screenWidth * 0.85,
                       child: Obx(() {
                         return TextField(
-                          controller: loginController.passwordController,
+                          controller: registerController.passwordController,
                           keyboardType: TextInputType.text,
-                          obscureText: loginController.visiblePassword.value,
+                          obscureText: registerController.visiblePassword.value,
                           decoration: InputDecoration(
                             labelText: 'Password',
                             labelStyle: TextStyle(color: utils.secondaryColor),
@@ -111,19 +136,19 @@ class Login extends StatelessWidget {
                             hintStyle: TextStyle(color: utils.secondaryColor),
                             filled: true,
                             prefixIcon: const Icon(CupertinoIcons.lock_fill),
-                            errorText: _errorMsg,
                             suffixIcon: IconButton(
                                 onPressed: () {
-                                  loginController.visiblePassword.value =
-                                      !loginController.visiblePassword.value;
+                                  registerController.visiblePassword.value =
+                                      !registerController.visiblePassword.value;
                                 },
                                 icon: Icon(
-                                  loginController.visiblePassword.value
+                                  registerController.visiblePassword.value
                                       ? Icons.visibility_off
                                       : Icons.visibility,
-                                  color: loginController.visiblePassword.value
-                                      ? Colors.grey.shade500
-                                      : utils.secondaryColor,
+                                  color:
+                                      registerController.visiblePassword.value
+                                          ? Colors.grey.shade500
+                                          : utils.secondaryColor,
                                 )),
                             fillColor: Colors.white,
                             border: OutlineInputBorder(
@@ -138,27 +163,17 @@ class Login extends StatelessWidget {
                           ),
                         );
                       })),
-                  const SizedBox(height: 14),
+                  const SizedBox(height: 16),
                   InkWell(
                     onTap: () {
-                      Get.toNamed('/forgetScreen');
+                      Get.toNamed('/loginScreen');
                     },
                     child: const Text(
-                      'Forget Password?',
+                      'Already Have Account? Login',
                       style: TextStyle(fontSize: 16, color: Color(0xff114c2b)),
                     ),
                   ),
-                  const SizedBox(height: 12),
-                  InkWell(
-                    onTap: () {
-                      Get.toNamed('/registerScreen');
-                    },
-                    child: const Text(
-                      'New Here? Register Now',
-                      style: TextStyle(fontSize: 16, color: Color(0xff114c2b)),
-                    ),
-                  ),
-                  const SizedBox(height: 14),
+                  const SizedBox(height: 16),
                   const Center(
                     child: Row(
                       children: [
@@ -184,7 +199,6 @@ class Login extends StatelessWidget {
                       ],
                     ),
                   ),
-                  const SizedBox(height: 12),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
@@ -219,15 +233,15 @@ class Login extends StatelessWidget {
                         ),
                         backgroundColor: utils.primaryColor,
                       ),
-                      onPressed: loginController.isLoading.value
+                      onPressed: registerController.isLoading.value
                           ? null
-                          : loginController.signInWithEmailAndPassword,
-                      child: Obx(() => loginController.isLoading.value
+                          : registerController.signUpAndSaveToFirestore,
+                      child: Obx(() => registerController.isLoading.value
                           ? CircularProgressIndicator(
                               color: utils.secondaryColor,
                             )
                           : Text(
-                              'Login',
+                              'Register',
                               style: TextStyle(
                                   color: utils.secondaryColor,
                                   fontWeight: FontWeight.bold),
