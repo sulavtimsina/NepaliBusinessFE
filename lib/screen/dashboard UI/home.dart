@@ -1,18 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
+import 'package:nepaliapp/controller/dashboard%20Controller/navigation_controller.dart';
 import 'package:nepaliapp/utils/utils.dart';
 
-class Home extends StatefulWidget {
+class Home extends StatelessWidget {
   const Home({super.key});
 
   @override
-  State<Home> createState() => _HomeState();
-}
-
-class _HomeState extends State<Home> {
-  final Utils utils = Utils();
-  @override
   Widget build(BuildContext context) {
+    final NavigationController navigationController =
+        Get.put(NavigationController());
+    final Utils utils = Utils();
     return Scaffold(
       appBar: AppBar(
         title: Text(utils.name),
@@ -20,6 +19,8 @@ class _HomeState extends State<Home> {
         centerTitle: true,
         automaticallyImplyLeading: false,
       ),
+      body: Obx(() => navigationController
+          .screens[navigationController.selectedIndex.value]),
       bottomNavigationBar: Container(
         color: utils.primaryColor,
         child: Padding(
@@ -49,6 +50,9 @@ class _HomeState extends State<Home> {
                 text: 'Profile',
               ),
             ],
+            onTabChange: (index) {
+              navigationController.updatedIndex(index);
+            },
           ),
         ),
       ),

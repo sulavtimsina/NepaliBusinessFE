@@ -25,7 +25,7 @@ class AppRoutes {
             transition: Transition.fade),
         GetPage(
             name: RouteNames.home,
-            page: () => const Home(),
+            page: () => Home(),
             transitionDuration: const Duration(milliseconds: 350),
             transition: Transition.fade),
       ];
