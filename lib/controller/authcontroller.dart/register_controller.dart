@@ -1,0 +1,89 @@
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:nepaliapp/utils/utils.dart';
+
+class RegisterController extends GetxController {
+  final TextEditingController nameController = TextEditingController();
+  final TextEditingController emailController = TextEditingController();
+  final TextEditingController passwordController = TextEditingController();
+  RxBool visiblePassword = true.obs;
+
+  RxBool isLoading = false.obs;
+
+  final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
+  final FirebaseFirestore _firestore = FirebaseFirestore.instance;
+
+  User? get currentUser => _firebaseAuth.currentUser;
+
+  Stream<User?> get authStateChanges => _firebaseAuth.authStateChanges();
+
+  final Utils utils = Utils();
+
+  String? validateEmail(String email) {
+    if (!RegExp(r"^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+\.[a-z]+$").hasMatch(email)) {
+      return "Please enter a valid email";
+    }
+    return null;
+  }
+
+  String? validatePassword(String password) {
+    if (password.length < 6) {
+      return "Password must be at least 6 characters";
+    }
+    return null;
+  }
+
+  Future<void> signUpAndSaveToFirestore() async {
+    final name = nameController.text.trim();
+    final email = emailController.text.trim();
+    final password = passwordController.text.trim();
+
+    final emailError = validateEmail(email);
+    final passwordError = validatePassword(password);
+
+    if (emailError != null || passwordError != null) {
+      utils.showSnackbar("Error", emailError ?? passwordError!);
+      return;
+    }
+
+    try {
+      isLoading.value = true;
+
+      UserCredential userCredential = await _firebaseAuth
+          .createUserWithEmailAndPassword(email: email, password: password);
+
+      await _firestore.collection('users').doc(userCredential.user?.uid).set({
+        'name': name,
+        'email': email,
+        'uid': userCredential.user?.uid,
+        'createdAt': FieldValue.serverTimestamp(),
+      });
+
+      Get.toNamed('/home')?.then((_) {
+        nameController.clear();
+        emailController.clear();
+        passwordController.clear();
+      });
+    } on FirebaseAuthException catch (e) {
+      utils.showSnackbar("Error", e.toString());
+    } catch (e) {
+      utils.showSnackbar("Error", "Failed to Save User");
+    } finally {
+      isLoading.value = false;
+    }
+  }
+
+  void togglePasswordVisibility() {
+    visiblePassword.toggle();
+  }
+
+  @override
+  void onClose() {
+    nameController.dispose();
+    emailController.dispose();
+    passwordController.dispose();
+    super.onClose();
+  }
+}

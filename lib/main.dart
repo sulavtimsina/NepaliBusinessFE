@@ -1,6 +1,8 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:nepaliapp/UI/login_screen.dart';
+import 'package:nepaliapp/routes/routes.dart';
 import 'package:nepaliapp/utils/utils.dart';
 
 void main() async {
@@ -14,13 +16,14 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Utils().primaryColor),
-        useMaterial3: true,
-      ),
-      home: const Login(),
-    );
+    return GetMaterialApp(
+        debugShowCheckedModeBanner: false,
+        theme: ThemeData(
+          colorScheme: ColorScheme.fromSeed(seedColor: Utils().primaryColor),
+          useMaterial3: true,
+        ),
+        home: const Login(),
+        initialRoute: '/loginScreen',
+        getPages: AppRoutes.appRoutes());
   }
 }
