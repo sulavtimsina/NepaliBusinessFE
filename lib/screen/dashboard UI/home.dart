@@ -24,7 +24,7 @@ class Home extends StatelessWidget {
       bottomNavigationBar: Container(
         color: utils.primaryColor,
         child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 15),
+          padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
           child: GNav(
             backgroundColor: utils.primaryColor,
             color: utils.standardColor,

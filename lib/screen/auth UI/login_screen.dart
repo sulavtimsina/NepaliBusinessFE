@@ -13,7 +13,6 @@ class Login extends StatelessWidget {
     final screenWidth = screenSize.width;
     final screenHeight = screenSize.height;
     final LoginController loginController = Get.put(LoginController());
-    String? _errorMsg;
     final Utils utils = Utils();
     return Scaffold(
       appBar: AppBar(
@@ -111,7 +110,6 @@ class Login extends StatelessWidget {
                             hintStyle: TextStyle(color: utils.secondaryColor),
                             filled: true,
                             prefixIcon: const Icon(CupertinoIcons.lock_fill),
-                            errorText: _errorMsg,
                             suffixIcon: IconButton(
                                 onPressed: () {
                                   loginController.visiblePassword.value =
@@ -189,7 +187,9 @@ class Login extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
                       GestureDetector(
-                        onTap: () {},
+                        onTap: () {
+                          loginController.signInwithGoogle();
+                        },
                         child: Image.asset(
                           'assets/search.png',
                           width: screenWidth * 0.2,

@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:nepaliapp/controller/authcontroller/login_controller.dart';
 import 'package:nepaliapp/controller/authcontroller/register_controller.dart';
 import 'package:nepaliapp/utils/utils.dart';
 
@@ -13,6 +14,7 @@ class RegisterScreen extends StatelessWidget {
     final screenWidth = screenSize.width;
     final screenHeight = screenSize.height;
     final RegisterController registerController = Get.put(RegisterController());
+    final LoginController loginController = Get.put(LoginController());
     final Utils utils = Utils();
     return Scaffold(
       appBar: AppBar(
@@ -203,7 +205,9 @@ class RegisterScreen extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
                       GestureDetector(
-                        onTap: () {},
+                        onTap: () {
+                          loginController.signInwithGoogle();
+                        },
                         child: Image.asset(
                           'assets/search.png',
                           width: screenWidth * 0.2,

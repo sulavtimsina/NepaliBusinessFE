@@ -1,6 +1,8 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'package:nepaliapp/utils/utils.dart';
 
 class LoginController extends GetxController {
@@ -11,10 +13,12 @@ class LoginController extends GetxController {
   RxBool isLoading = false.obs;
 
   final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
+  final FirebaseFirestore _firestore = FirebaseFirestore.instance;
 
   User? get currentUser => _firebaseAuth.currentUser;
 
   Stream<User?> get authStateChanges => _firebaseAuth.authStateChanges();
+
   final Utils utils = Utils();
 
   String? validateEmail(String email) {
@@ -72,6 +76,38 @@ class LoginController extends GetxController {
       Get.offAllNamed('/loginScreen');
     } catch (e) {
       utils.showSnackbar("Error", "Failed to sign out. Please try again.");
+    }
+  }
+
+  Future<void> signInwithGoogle() async {
+    try {
+      final GoogleSignInAccount? gUser = await GoogleSignIn().signIn();
+
+      if (gUser == null) return;
+
+      final GoogleSignInAuthentication gAuth = await gUser.authentication;
+
+      final OAuthCredential credential = GoogleAuthProvider.credential(
+        accessToken: gAuth.accessToken,
+        idToken: gAuth.idToken,
+      );
+
+      final UserCredential userCredential =
+          await _firebaseAuth.signInWithCredential(credential);
+
+      final User? user = userCredential.user;
+
+      if (user != null) {
+        await _firestore.collection('users').doc(user.uid).set({
+          'name': user.displayName ?? 'No Name',
+          'email': user.email ?? 'No Email',
+          'uid': user.uid,
+          'photoURL': user.photoURL ?? 'No Photo',
+          'createdAt': FieldValue.serverTimestamp(),
+        }, SetOptions(merge: true));
+      }
+    } catch (e) {
+      print('Error during Google Sign-In: $e');
     }
   }
 

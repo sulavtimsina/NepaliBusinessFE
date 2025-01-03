@@ -75,6 +75,7 @@ class RegisterController extends GetxController {
     }
   }
 
+  
   void togglePasswordVisibility() {
     visiblePassword.toggle();
   }
