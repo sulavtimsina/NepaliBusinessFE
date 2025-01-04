@@ -81,6 +81,7 @@ class LoginController extends GetxController {
 
   Future<void> signInwithGoogle() async {
     try {
+      isLoading.value = true;
       final GoogleSignInAccount? gUser = await GoogleSignIn().signIn();
 
       if (gUser == null) return;
@@ -106,8 +107,8 @@ class LoginController extends GetxController {
           'createdAt': FieldValue.serverTimestamp(),
         }, SetOptions(merge: true));
       }
-    } catch (e) {
-      print('Error during Google Sign-In: $e');
+    } finally {
+      isLoading.value = false;
     }
   }
 

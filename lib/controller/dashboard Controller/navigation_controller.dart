@@ -12,7 +12,7 @@ class NavigationController extends GetxController {
     DashboardScreen(),
     CategoryScreen(),
     FavoriteScreen(),
-    ProfileScreen()
+    ProfileScreen(),
   ];
 
   void updatedIndex(int index) {

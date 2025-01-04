@@ -3,6 +3,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:nepaliapp/utils/utils.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 
 class RegisterController extends GetxController {
   final TextEditingController nameController = TextEditingController();
@@ -75,7 +76,40 @@ class RegisterController extends GetxController {
     }
   }
 
-  
+  Future<void> signInwithGoogle() async {
+    try {
+      isLoading.value = true;
+      final GoogleSignInAccount? gUser = await GoogleSignIn().signIn();
+
+      if (gUser == null) return;
+
+      final GoogleSignInAuthentication gAuth = await gUser.authentication;
+
+      final OAuthCredential credential = GoogleAuthProvider.credential(
+        accessToken: gAuth.accessToken,
+        idToken: gAuth.idToken,
+      );
+
+      final UserCredential userCredential =
+          await _firebaseAuth.signInWithCredential(credential);
+
+      final User? user = userCredential.user;
+
+      if (user != null) {
+        await _firestore.collection('users').doc(user.uid).set({
+          'name': user.displayName ?? 'No Name',
+          'email': user.email ?? 'No Email',
+          'uid': user.uid,
+          'photoURL': user.photoURL ?? 'No Photo',
+          'createdAt': FieldValue.serverTimestamp(),
+        }, SetOptions(merge: true));
+      }
+      Get.back();
+    } finally {
+      isLoading.value = false;
+    }
+  }
+
   void togglePasswordVisibility() {
     visiblePassword.toggle();
   }
