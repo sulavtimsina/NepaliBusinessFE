@@ -22,14 +22,14 @@ class Home extends StatelessWidget {
       body: Obx(() => navigationController
           .screens[navigationController.selectedIndex.value]),
       bottomNavigationBar: Container(
-        color: utils.primaryColor,
+        color: utils.navtextcolor,
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
           child: GNav(
-            backgroundColor: utils.primaryColor,
+            backgroundColor: utils.navtextcolor,
             color: utils.standardColor,
             activeColor: utils.secondaryColor,
-            tabBackgroundColor: utils.navtextcolor,
+            tabBackgroundColor: utils.primaryColor,
             gap: 8,
             padding: const EdgeInsets.all(16),
             tabs: const [
