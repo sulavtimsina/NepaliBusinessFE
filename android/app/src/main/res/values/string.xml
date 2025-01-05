@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<resources>
+<string name="app_name">Ease Buz</string>
+<string name="facebook_app_id">1322085378798004</string>
+<string name="fb_login_protocol_scheme">fb1322085378798004</string>
+<string name="facebook_client_token">5d1ceea907bfe86b1b28bdd75f7f489d</string>
+
+</resources>

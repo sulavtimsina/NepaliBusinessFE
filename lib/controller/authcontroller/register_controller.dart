@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'package:get/get.dart';
 import 'package:nepaliapp/utils/utils.dart';
 import 'package:google_sign_in/google_sign_in.dart';
@@ -105,6 +106,39 @@ class RegisterController extends GetxController {
         }, SetOptions(merge: true));
       }
       Get.back();
+    } finally {
+      isLoading.value = false;
+    }
+  }
+
+  Future<void> signInWithFacebook() async {
+    try {
+      isLoading.value = true;
+      final LoginResult loginResult = await FacebookAuth.instance.login();
+
+      if (loginResult.status == LoginStatus.success) {
+        final OAuthCredential facebookAuthCredential =
+            FacebookAuthProvider.credential(
+                loginResult.accessToken!.tokenString);
+
+        final UserCredential userCredential =
+            await _firebaseAuth.signInWithCredential(facebookAuthCredential);
+
+        final User? user = userCredential.user;
+
+        if (user != null) {
+          await _firestore.collection('users').doc(user.uid).set({
+            'name': user.displayName ?? 'No Name',
+            'email': user.email ?? 'No Email',
+            'uid': user.uid,
+            'photoURL': user.photoURL ?? 'No Photo',
+            'createdAt': FieldValue.serverTimestamp(),
+          }, SetOptions(merge: true));
+        }
+        Get.back();
+      } else {
+        print('Facebook sign-in failed: ${loginResult.message}');
+      }
     } finally {
       isLoading.value = false;
     }

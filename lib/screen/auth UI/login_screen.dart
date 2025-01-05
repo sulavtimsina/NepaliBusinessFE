@@ -197,7 +197,9 @@ class Login extends StatelessWidget {
                         ),
                       ),
                       GestureDetector(
-                        onTap: () {},
+                        onTap: () {
+                          loginController.signInWithFacebook();
+                        },
                         child: Image.asset(
                           'assets/facebook.png',
                           width: screenWidth * 0.2,

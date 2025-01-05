@@ -213,7 +213,9 @@ class RegisterScreen extends StatelessWidget {
                         ),
                       ),
                       GestureDetector(
-                        onTap: () {},
+                        onTap: () {
+                          registerController.signInWithFacebook();
+                        },
                         child: Image.asset(
                           'assets/facebook.png',
                           width: screenWidth * 0.2,
