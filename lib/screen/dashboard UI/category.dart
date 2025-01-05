@@ -52,10 +52,10 @@ class CategoryScreen extends StatelessWidget {
                         physics: const NeverScrollableScrollPhysics(),
                         gridDelegate:
                             const SliverGridDelegateWithFixedCrossAxisCount(
-                          crossAxisCount: 2,
-                          crossAxisSpacing: 10,
-                          mainAxisSpacing: 10,
-                        ),
+                                crossAxisCount: 2,
+                                crossAxisSpacing: 10,
+                                mainAxisSpacing: 10,
+                                mainAxisExtent: 100),
                         itemCount: categoryList.length,
                         itemBuilder: (context, index) {
                           final doc = snapshot.data!.docs[index];
@@ -70,13 +70,16 @@ class CategoryScreen extends StatelessWidget {
                           final displayCategory =
                               category[0].toUpperCase() + category.substring(1);
 
-                          return Card(
-                            elevation: 4,
-                            child: Center(
-                              child: Text(
-                                displayCategory,
-                                textAlign: TextAlign.center,
-                                style: const TextStyle(fontSize: 16),
+                          return SizedBox(
+                            height: 2,
+                            child: Card(
+                              elevation: 4,
+                              child: Center(
+                                child: Text(
+                                  displayCategory,
+                                  textAlign: TextAlign.center,
+                                  style: const TextStyle(fontSize: 16),
+                                ),
                               ),
                             ),
                           );

@@ -1,6 +1,7 @@
-import 'package:cached_network_image/cached_network_image.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:nepaliapp/controller/dashboard%20Controller/business_data_controller.dart';
+import 'package:nepaliapp/utils/business_list_item.dart';
 import 'package:nepaliapp/utils/custom_search_bar.dart';
 
 class FavoriteScreen extends StatelessWidget {
@@ -8,8 +9,8 @@ class FavoriteScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final firestoreData =
-        FirebaseFirestore.instance.collection('Business').snapshots();
+    final controller = Get.put(BusinessDataController());
+
     return Scaffold(
       body: SingleChildScrollView(
         child: Column(
@@ -26,7 +27,7 @@ class FavoriteScreen extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.only(left: 12, right: 12),
               child: StreamBuilder(
-                stream: firestoreData,
+                stream: controller.businessStream,
                 builder: (context, snapshot) {
                   if (snapshot.connectionState == ConnectionState.waiting) {
                     return const Center(child: CircularProgressIndicator());
@@ -39,55 +40,14 @@ class FavoriteScreen extends StatelessWidget {
                       height: MediaQuery.of(context).size.height * 0.8,
                       child: ListView.separated(
                         itemBuilder: (context, index) {
-                          return ListTile(
-                            leading: Container(
-                              width: 80,
-                              height: 80,
-                              decoration: BoxDecoration(
-                                shape: BoxShape.rectangle,
-                                borderRadius: BorderRadius.circular(8),
-                                image: DecorationImage(
-                                  image: CachedNetworkImageProvider(
-                                    snapshot.data!.docs[index]["ImageUrl"],
-                                  ),
-                                  fit: BoxFit.cover,
-                                ),
-                              ),
-                              child: CachedNetworkImage(
-                                imageUrl: snapshot.data!.docs[index]
-                                    ["ImageUrl"],
-                                placeholder: (context, url) => const Center(
-                                  child: CircularProgressIndicator(),
-                                ),
-                                errorWidget: (context, url, error) =>
-                                    const Center(
-                                  child: Icon(Icons.error),
-                                ),
-                              ),
-                            ),
-                            title:
-                                Text('${snapshot.data!.docs[index]["Name"]}'),
-                            subtitle: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Text(
-                                    '${snapshot.data!.docs[index]["Category"]}'),
-                                Row(
-                                  children: List.generate(5, (starIndex) {
-                                    int rating =
-                                        snapshot.data!.docs[index]["Rating"];
-                                    return Icon(
-                                      starIndex < rating
-                                          ? Icons.star
-                                          : Icons.star_border,
-                                      color: Colors.amber,
-                                    );
-                                  }),
-                                ),
-                              ],
-                            ),
-                            trailing: const Icon(Icons.favorite_border),
+                          return BusinessListItem(
+                            name: snapshot.data!.docs[index]["Name"],
+                            imageUrl: snapshot.data!.docs[index]["ImageUrl"],
+                            category: snapshot.data!.docs[index]["Category"],
+                            rating: snapshot.data!.docs[index]["Rating"],
+                            location: snapshot.data!.docs[index]["Location"],
+                            description: snapshot.data!.docs[index]
+                                ["Description"],
                           );
                         },
                         separatorBuilder: (context, index) {
