@@ -1,5 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:nepaliapp/screen/dashboard%20UI/details%20UI/category_detail_buz.dart';
 import 'package:nepaliapp/utils/custom_search_bar.dart';
 
 class CategoryScreen extends StatelessWidget {
@@ -38,7 +40,6 @@ class CategoryScreen extends StatelessWidget {
                       child: Text('No categories found.'),
                     );
                   } else {
-                    // Extract unique categories
                     final uniqueCategories = <String>{};
                     for (var doc in snapshot.data!.docs) {
                       final category = doc['Category'] ?? "No Name";
@@ -70,15 +71,21 @@ class CategoryScreen extends StatelessWidget {
                           final displayCategory =
                               category[0].toUpperCase() + category.substring(1);
 
-                          return SizedBox(
-                            height: 2,
-                            child: Card(
-                              elevation: 4,
-                              child: Center(
-                                child: Text(
-                                  displayCategory,
-                                  textAlign: TextAlign.center,
-                                  style: const TextStyle(fontSize: 16),
+                          return GestureDetector(
+                            onTap: () {
+                              Get.to(CategoryDetailBuz(
+                                  categoryData: displayCategory));
+                            },
+                            child: SizedBox(
+                              height: 2,
+                              child: Card(
+                                elevation: 4,
+                                child: Center(
+                                  child: Text(
+                                    displayCategory,
+                                    textAlign: TextAlign.center,
+                                    style: const TextStyle(fontSize: 16),
+                                  ),
                                 ),
                               ),
                             ),

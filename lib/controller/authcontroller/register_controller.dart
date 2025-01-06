@@ -136,9 +136,7 @@ class RegisterController extends GetxController {
           }, SetOptions(merge: true));
         }
         Get.back();
-      } else {
-        print('Facebook sign-in failed: ${loginResult.message}');
-      }
+      } else {}
     } finally {
       isLoading.value = false;
     }

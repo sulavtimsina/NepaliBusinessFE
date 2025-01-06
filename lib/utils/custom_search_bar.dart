@@ -6,6 +6,7 @@ class CustomSearchBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // final BusinessDataController controller = Get.find();
     final Utils utils = Utils();
 
     return Padding(
