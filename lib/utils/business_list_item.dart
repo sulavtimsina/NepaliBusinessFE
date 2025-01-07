@@ -10,6 +10,8 @@ class BusinessListItem extends StatelessWidget {
   final String location;
   final String description;
   final int rating;
+  final bool isFavorite;
+  final VoidCallback onFavoriteToggle;
 
   const BusinessListItem({
     super.key,
@@ -19,6 +21,8 @@ class BusinessListItem extends StatelessWidget {
     required this.rating,
     required this.location,
     required this.description,
+    required this.isFavorite,
+    required this.onFavoriteToggle,
   });
 
   @override
@@ -61,7 +65,13 @@ class BusinessListItem extends StatelessWidget {
           ),
         ],
       ),
-      trailing: const Icon(Icons.favorite_border),
+      trailing: IconButton(
+        icon: Icon(
+          isFavorite ? Icons.favorite : Icons.favorite_border,
+          color: isFavorite ? Colors.red : Colors.grey,
+        ),
+        onPressed: onFavoriteToggle,
+      ),
     );
   }
 }

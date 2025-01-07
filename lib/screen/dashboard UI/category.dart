@@ -2,7 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:nepaliapp/screen/dashboard%20UI/details%20UI/category_detail_buz.dart';
-import 'package:nepaliapp/utils/custom_search_bar.dart';
+// import 'package:nepaliapp/utils/custom_search_bar.dart';
 
 class CategoryScreen extends StatelessWidget {
   const CategoryScreen({super.key});
@@ -16,7 +16,7 @@ class CategoryScreen extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const CustomSearchBar(),
+            // const CustomSearchBar(),
             const Padding(
               padding: EdgeInsets.only(left: 12),
               child: Text(
