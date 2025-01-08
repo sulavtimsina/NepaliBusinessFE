@@ -28,7 +28,7 @@ class BusinessDetail extends StatelessWidget {
     final LocationController controller = Get.put(LocationController());
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Business Details'),
+        title: Text(utils.name),
         centerTitle: true,
         backgroundColor: utils.primaryColor,
       ),

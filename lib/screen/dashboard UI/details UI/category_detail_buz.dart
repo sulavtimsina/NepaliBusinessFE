@@ -16,7 +16,7 @@ class CategoryDetailBuz extends StatelessWidget {
     final Utils utils = Utils();
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Businesses'),
+        title: Text(utils.name),
         centerTitle: true,
         backgroundColor:
             utils.primaryColor, // Replace with your Utils primaryColor

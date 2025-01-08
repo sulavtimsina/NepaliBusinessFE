@@ -44,6 +44,7 @@ dependencies:
   flutter_facebook_auth: ^7.1.1
   cached_network_image: ^3.4.1
   url_launcher: ^6.3.1
+  device_preview: ^1.2.0
 
 dev_dependencies:
   flutter_test:
