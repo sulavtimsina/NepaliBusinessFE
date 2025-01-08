@@ -57,9 +57,6 @@ class CategoryDetailBuz extends StatelessWidget {
                     rating: business["Rating"],
                     location: business["Location"],
                     description: business["Description"],
-                    isFavorite: controller.isFavorite(business['id']),
-                    onFavoriteToggle: () =>
-                        controller.toggleFavorite(business['id']),
                   );
                 },
                 separatorBuilder: (context, index) => const Divider(),

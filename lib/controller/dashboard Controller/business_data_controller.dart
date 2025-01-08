@@ -6,7 +6,6 @@ class BusinessDataController extends GetxController {
       FirebaseFirestore.instance.collection('Business').snapshots();
   final businessList = <Map<String, dynamic>>[].obs;
   final filteredList = <Map<String, dynamic>>[].obs;
-  final RxSet<String> favoriteIds = <String>{}.obs;
 
   @override
   void onInit() {
@@ -51,18 +50,6 @@ class BusinessDataController extends GetxController {
                   .toLowerCase()
                   .contains(query.toLowerCase()))
           .toList();
-    }
-  }
-
-  bool isFavorite(String id) {
-    return favoriteIds.contains(id);
-  }
-
-  void toggleFavorite(String id) {
-    if (favoriteIds.contains(id)) {
-      favoriteIds.remove(id);
-    } else {
-      favoriteIds.add(id);
     }
   }
 }

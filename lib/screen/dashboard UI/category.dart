@@ -1,7 +1,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:nepaliapp/controller/dashboard%20Controller/business_data_controller.dart';
 import 'package:nepaliapp/screen/dashboard%20UI/details%20UI/category_detail_buz.dart';
+import 'package:nepaliapp/utils/custom_search_bar.dart';
 // import 'package:nepaliapp/utils/custom_search_bar.dart';
 
 class CategoryScreen extends StatelessWidget {
@@ -9,14 +11,15 @@ class CategoryScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final firestoreCategory =
-        FirebaseFirestore.instance.collection('Business').snapshots();
+    final BusinessDataController controller = Get.put(BusinessDataController());
     return Scaffold(
       body: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            // const CustomSearchBar(),
+            CustomSearchBar(
+              onSearch: (query) => controller.filterList(query),
+            ),
             const Padding(
               padding: EdgeInsets.only(left: 12),
               child: Text(
@@ -27,7 +30,7 @@ class CategoryScreen extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 12),
               child: StreamBuilder<QuerySnapshot>(
-                stream: firestoreCategory,
+                stream: controller.businessStream,
                 builder: (context, snapshot) {
                   if (snapshot.connectionState == ConnectionState.waiting) {
                     return const Center(child: CircularProgressIndicator());

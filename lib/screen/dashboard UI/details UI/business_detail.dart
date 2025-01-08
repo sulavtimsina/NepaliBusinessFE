@@ -1,5 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:nepaliapp/controller/dashboard%20Controller/location_controller.dart';
 import 'package:nepaliapp/utils/utils.dart';
 
 class BusinessDetail extends StatelessWidget {
@@ -23,6 +25,7 @@ class BusinessDetail extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final LocationController controller = Get.put(LocationController());
     return Scaffold(
       appBar: AppBar(
         title: const Text('Business Details'),
@@ -58,17 +61,22 @@ class BusinessDetail extends StatelessWidget {
               'Category: $categoryBusiness',
               style: const TextStyle(
                 fontSize: 16,
-                color: Colors.grey,
+                color: Colors.black,
               ),
             ),
             const SizedBox(height: 8),
 
             // Location
-            Text(
-              'Location: $location',
-              style: const TextStyle(
-                fontSize: 16,
-                color: Colors.grey,
+            InkWell(
+              onTap: () {
+                controller.openGoogleMaps(location);
+              },
+              child: Text(
+                'Location: $location',
+                style: const TextStyle(
+                  fontSize: 16,
+                  color: Colors.black,
+                ),
               ),
             ),
 

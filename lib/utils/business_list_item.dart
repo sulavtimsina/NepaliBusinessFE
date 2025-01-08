@@ -1,6 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:nepaliapp/controller/dashboard%20Controller/favorite_controller.dart';
 import 'package:nepaliapp/screen/dashboard%20UI/details%20UI/business_detail.dart';
 
 class BusinessListItem extends StatelessWidget {
@@ -10,8 +11,6 @@ class BusinessListItem extends StatelessWidget {
   final String location;
   final String description;
   final int rating;
-  final bool isFavorite;
-  final VoidCallback onFavoriteToggle;
 
   const BusinessListItem({
     super.key,
@@ -21,12 +20,13 @@ class BusinessListItem extends StatelessWidget {
     required this.rating,
     required this.location,
     required this.description,
-    required this.isFavorite,
-    required this.onFavoriteToggle,
   });
 
   @override
   Widget build(BuildContext context) {
+    final FavoriteController favoritesController =
+        Get.put(FavoriteController());
+
     return ListTile(
       onTap: () {
         Get.to(BusinessDetail(
@@ -65,13 +65,30 @@ class BusinessListItem extends StatelessWidget {
           ),
         ],
       ),
-      trailing: IconButton(
-        icon: Icon(
-          isFavorite ? Icons.favorite : Icons.favorite_border,
-          color: isFavorite ? Colors.red : Colors.grey,
-        ),
-        onPressed: onFavoriteToggle,
-      ),
+      trailing: Obx(() {
+        final isFavorite = favoritesController.isFavorite(name);
+        return IconButton(
+          icon: Icon(
+            isFavorite ? Icons.favorite : Icons.favorite_border,
+            color: isFavorite ? Colors.red : Colors.grey,
+          ),
+          onPressed: () {
+            if (isFavorite) {
+              favoritesController.removeFromFavorites(name);
+            } else {
+              final businessData = {
+                'name': name,
+                'imageUrl': imageUrl,
+                'category': category,
+                'location': location,
+                'description': description,
+                'rating': rating,
+              };
+              favoritesController.addToFavorites(businessData);
+            }
+          },
+        );
+      }),
     );
   }
 }
