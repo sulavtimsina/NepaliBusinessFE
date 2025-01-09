@@ -11,6 +11,7 @@ class Home extends StatelessWidget {
   Widget build(BuildContext context) {
     final NavigationController navigationController =
         Get.put(NavigationController());
+
     final Utils utils = Utils();
     return Scaffold(
       appBar: AppBar(

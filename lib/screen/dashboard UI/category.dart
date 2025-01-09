@@ -1,17 +1,16 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:nepaliapp/controller/dashboard%20Controller/business_data_controller.dart';
 import 'package:nepaliapp/screen/dashboard%20UI/details%20UI/category_detail_buz.dart';
 import 'package:nepaliapp/utils/custom_search_bar.dart';
-// import 'package:nepaliapp/utils/custom_search_bar.dart';
+import '../../controller/dashboard Controller/category_controller.dart';
 
 class CategoryScreen extends StatelessWidget {
   const CategoryScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final BusinessDataController controller = Get.put(BusinessDataController());
+    final CategoryController controller = Get.put(CategoryController());
+
     return Scaffold(
       body: SingleChildScrollView(
         child: Column(
@@ -29,74 +28,44 @@ class CategoryScreen extends StatelessWidget {
             ),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 12),
-              child: StreamBuilder<QuerySnapshot>(
-                stream: controller.businessStream,
-                builder: (context, snapshot) {
-                  if (snapshot.connectionState == ConnectionState.waiting) {
-                    return const Center(child: CircularProgressIndicator());
-                  } else if (snapshot.hasError) {
-                    return Center(
-                      child: Text('Error: ${snapshot.error}'),
+              child: Obx(() {
+                if (controller.filteredCategories.isEmpty) {
+                  return const Center(
+                    child: Text('No categories found.'),
+                  );
+                }
+
+                return GridView.builder(
+                  shrinkWrap: true,
+                  physics: const NeverScrollableScrollPhysics(),
+                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: 2,
+                    crossAxisSpacing: 10,
+                    mainAxisSpacing: 10,
+                    mainAxisExtent: 100,
+                  ),
+                  itemCount: controller.filteredCategories.length,
+                  itemBuilder: (context, index) {
+                    final displayCategory =
+                        controller.filteredCategories[index];
+                    return GestureDetector(
+                      onTap: () {
+                        Get.toNamed('detailScreen', arguments: displayCategory);
+                      },
+                      child: Card(
+                        elevation: 4,
+                        child: Center(
+                          child: Text(
+                            displayCategory,
+                            textAlign: TextAlign.center,
+                            style: const TextStyle(fontSize: 16),
+                          ),
+                        ),
+                      ),
                     );
-                  } else if (!snapshot.hasData || snapshot.data!.docs.isEmpty) {
-                    return const Center(
-                      child: Text('No categories found.'),
-                    );
-                  } else {
-                    final uniqueCategories = <String>{};
-                    for (var doc in snapshot.data!.docs) {
-                      final category = doc['Category'] ?? "No Name";
-                      uniqueCategories.add(category);
-                    }
-
-                    final categoryList = uniqueCategories.toList();
-
-                    return GridView.builder(
-                        shrinkWrap: true,
-                        physics: const NeverScrollableScrollPhysics(),
-                        gridDelegate:
-                            const SliverGridDelegateWithFixedCrossAxisCount(
-                                crossAxisCount: 2,
-                                crossAxisSpacing: 10,
-                                mainAxisSpacing: 10,
-                                mainAxisExtent: 100),
-                        itemCount: categoryList.length,
-                        itemBuilder: (context, index) {
-                          final doc = snapshot.data!.docs[index];
-
-                          final data = doc.data() as Map<String, dynamic>;
-
-                          final category = data.containsKey('Category') &&
-                                  data['Category'] != null
-                              ? data['Category'].toString().toLowerCase()
-                              : "No Name";
-
-                          final displayCategory =
-                              category[0].toUpperCase() + category.substring(1);
-
-                          return GestureDetector(
-                            onTap: () {
-                              Get.to(CategoryDetailBuz(
-                                  categoryData: displayCategory));
-                            },
-                            child: SizedBox(
-                              height: 2,
-                              child: Card(
-                                elevation: 4,
-                                child: Center(
-                                  child: Text(
-                                    displayCategory,
-                                    textAlign: TextAlign.center,
-                                    style: const TextStyle(fontSize: 16),
-                                  ),
-                                ),
-                              ),
-                            ),
-                          );
-                        });
-                  }
-                },
-              ),
+                  },
+                );
+              }),
             ),
           ],
         ),
