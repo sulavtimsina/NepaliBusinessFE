@@ -31,8 +31,8 @@ class AppRoutes {
             transition: Transition.fade),
         GetPage(
             name: RouteNames.detailScreen,
-            page: () => const CategoryDetailBuz(
-                  categoryData: '',
+            page: () => CategoryDetailBuz(
+                  categoryData: Get.arguments['categoryData'],
                 ),
             transitionDuration: const Duration(milliseconds: 350),
             transition: Transition.fade),

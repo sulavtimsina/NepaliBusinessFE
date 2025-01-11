@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:nepaliapp/controller/authcontroller/auth_controller_state.dart';
 import 'package:nepaliapp/controller/dashboard%20Controller/user_profile_controller.dart';
@@ -17,18 +18,16 @@ class ProfileScreen extends StatelessWidget {
     final screenWidth = screenSize.width;
     final screenHeight = screenSize.height;
 
-    // Get the current user's UID
     final currentUser = FirebaseAuth.instance.currentUser;
 
-    // Check if the user is logged in
     if (currentUser != null) {
       profileControllerState.fetchUserData(currentUser.uid);
     } else {
-      return const Scaffold(
+      return Scaffold(
         body: Center(
           child: Text(
             "User not logged in",
-            style: TextStyle(fontSize: 18, color: Colors.red),
+            style: TextStyle(fontSize: 18.sp, color: Colors.red),
           ),
         ),
       );
@@ -64,37 +63,36 @@ class ProfileScreen extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               CircleAvatar(
-                radius: 80,
+                radius: 80.r,
                 backgroundImage: photoUrl.isNotEmpty
                     ? NetworkImage(photoUrl)
                     : const AssetImage("assets/default.png") as ImageProvider,
               ),
-              const SizedBox(height: 20),
+              SizedBox(height: 20.h),
               Text(
                 userName,
-                style:
-                    const TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+                style: TextStyle(fontSize: 24.sp, fontWeight: FontWeight.bold),
               ),
-              const SizedBox(height: 10),
+              SizedBox(height: 10.h),
               Text(
                 userEmail,
-                style: const TextStyle(fontSize: 16, color: Colors.grey),
+                style: TextStyle(fontSize: 16.sp, color: Colors.grey),
               ),
-              const SizedBox(height: 40),
+              SizedBox(height: 40.h),
               Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                padding: EdgeInsets.symmetric(horizontal: 16.0.w),
                 child: ElevatedButton.icon(
                   style: ElevatedButton.styleFrom(
-                    padding: const EdgeInsets.symmetric(
-                        vertical: 14, horizontal: 14),
+                    padding:
+                        EdgeInsets.symmetric(vertical: 14.h, horizontal: 14.w),
                     shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(8),
+                      borderRadius: BorderRadius.circular(8.r),
                     ),
                   ),
                   icon: const Icon(Icons.logout),
-                  label: const Text(
+                  label: Text(
                     "Logout",
-                    style: TextStyle(fontSize: 18),
+                    style: TextStyle(fontSize: 18.sp),
                   ),
                   onPressed: () {
                     authControllerState.signOut();

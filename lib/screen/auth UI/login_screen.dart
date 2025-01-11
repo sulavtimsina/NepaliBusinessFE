@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:nepaliapp/controller/authcontroller/login_controller.dart';
 import 'package:nepaliapp/utils/utils.dart';
@@ -27,7 +28,7 @@ class Login extends StatelessWidget {
           children: [
             Container(
               width: screenWidth,
-              height: screenHeight * 0.25,
+              height: screenHeight * 0.25.h,
               color: Colors.white,
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -38,27 +39,27 @@ class Login extends StatelessWidget {
                     style: TextStyle(
                         color: utils.secondaryColor,
                         fontWeight: FontWeight.bold,
-                        fontSize: 40),
+                        fontSize: 40.sp),
                   ),
-                  const SizedBox(
-                    height: 5,
+                  SizedBox(
+                    height: 5.h,
                   ),
                   Text(
                     utils.greeting,
                     style: TextStyle(
                         color: utils.standardColor,
                         fontWeight: FontWeight.normal,
-                        fontSize: 30),
+                        fontSize: 30.sp),
                   ),
-                  const SizedBox(
-                    height: 5,
+                  SizedBox(
+                    height: 5.h,
                   ),
                   Text(
                     utils.loginPageText,
                     style: TextStyle(
                         color: utils.secondaryColor,
                         fontWeight: FontWeight.normal,
-                        fontSize: 18),
+                        fontSize: 18.sp),
                   )
                 ],
               ),
@@ -71,7 +72,7 @@ class Login extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   SizedBox(
-                    width: screenWidth * 0.85,
+                    width: screenWidth * 0.85.w,
                     child: TextField(
                       controller: loginController.emailController,
                       keyboardType: TextInputType.emailAddress,
@@ -84,20 +85,20 @@ class Login extends StatelessWidget {
                         prefixIcon: const Icon(CupertinoIcons.mail_solid),
                         fillColor: Colors.white,
                         border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(10),
+                          borderRadius: BorderRadius.circular(10.r),
                           borderSide: const BorderSide(color: Colors.grey),
                         ),
                         focusedBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(10),
+                          borderRadius: BorderRadius.circular(10.r),
                           borderSide: const BorderSide(
                               color: Color.fromARGB(255, 11, 49, 13)),
                         ),
                       ),
                     ),
                   ),
-                  const SizedBox(height: 14),
+                  SizedBox(height: 14.h),
                   SizedBox(
-                      width: screenWidth * 0.85,
+                      width: screenWidth * 0.85.w,
                       child: Obx(() {
                         return TextField(
                           controller: loginController.passwordController,
@@ -125,55 +126,57 @@ class Login extends StatelessWidget {
                                 )),
                             fillColor: Colors.white,
                             border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(10),
+                              borderRadius: BorderRadius.circular(10.r),
                               borderSide: const BorderSide(color: Colors.grey),
                             ),
                             focusedBorder: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(10),
+                              borderRadius: BorderRadius.circular(10.r),
                               borderSide: const BorderSide(
                                   color: Color.fromARGB(255, 11, 49, 13)),
                             ),
                           ),
                         );
                       })),
-                  const SizedBox(height: 14),
+                  SizedBox(height: 14.h),
                   InkWell(
                     onTap: () {
                       Get.toNamed('/forgetScreen');
                     },
-                    child: const Text(
+                    child: Text(
                       'Forget Password?',
-                      style: TextStyle(fontSize: 16, color: Color(0xff114c2b)),
+                      style: TextStyle(
+                          fontSize: 16.sp, color: utils.secondaryColor),
                     ),
                   ),
-                  const SizedBox(height: 12),
+                  SizedBox(height: 12.h),
                   InkWell(
                     onTap: () {
                       Get.toNamed('/registerScreen');
                     },
-                    child: const Text(
+                    child: Text(
                       'New Here? Register Now',
-                      style: TextStyle(fontSize: 16, color: Color(0xff114c2b)),
+                      style: TextStyle(
+                          fontSize: 16.sp, color: utils.secondaryColor),
                     ),
                   ),
-                  const SizedBox(height: 14),
-                  const Center(
+                  SizedBox(height: 14.h),
+                  Center(
                     child: Row(
                       children: [
-                        Expanded(
+                        const Expanded(
                           child: Divider(
                             thickness: 1,
                             color: Colors.grey,
                           ),
                         ),
                         Padding(
-                          padding: EdgeInsets.symmetric(horizontal: 10.0),
-                          child: Text(
+                          padding: EdgeInsets.symmetric(horizontal: 10.0.h),
+                          child: const Text(
                             "or login with",
                             style: TextStyle(color: Colors.grey),
                           ),
                         ),
-                        Expanded(
+                        const Expanded(
                           child: Divider(
                             thickness: 1,
                             color: Colors.grey,
@@ -182,7 +185,7 @@ class Login extends StatelessWidget {
                       ],
                     ),
                   ),
-                  const SizedBox(height: 12),
+                  SizedBox(height: 12.h),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
@@ -192,8 +195,8 @@ class Login extends StatelessWidget {
                         },
                         child: Image.asset(
                           'assets/search.png',
-                          width: screenWidth * 0.2,
-                          height: screenHeight * 0.2,
+                          width: screenWidth * 0.15.w,
+                          height: screenHeight * 0.15.h,
                         ),
                       ),
                       GestureDetector(
@@ -202,22 +205,22 @@ class Login extends StatelessWidget {
                         },
                         child: Image.asset(
                           'assets/facebook.png',
-                          width: screenWidth * 0.2,
-                          height: screenHeight * 0.2,
+                          width: screenWidth * 0.15.w,
+                          height: screenHeight * 0.15.h,
                         ),
                       ),
                     ],
                   ),
-                  const SizedBox(
-                    height: 10,
+                  SizedBox(
+                    height: screenHeight * 0.1.h,
                   ),
                   SizedBox(
-                    height: 45,
-                    width: screenWidth * 0.85,
+                    height: 45.h,
+                    width: screenWidth * 0.85.w,
                     child: ElevatedButton(
                       style: ElevatedButton.styleFrom(
                         shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(5.0),
+                          borderRadius: BorderRadius.circular(5.0.r),
                         ),
                         backgroundColor: utils.primaryColor,
                       ),

@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get/get.dart';
@@ -8,18 +10,36 @@ class FavoriteController extends GetxController {
   final RxList<Map<String, dynamic>> favorites = <Map<String, dynamic>>[].obs;
   final favoriteList = <Map<String, dynamic>>[].obs;
   final filteredfavList = <Map<String, dynamic>>[].obs;
-  Stream<QuerySnapshot> get favoriteStream => FirebaseFirestore.instance
-      .collection('users')
-      .doc(userId)
-      .collection('favorites')
-      .snapshots();
+  StreamSubscription? _favoriteSubscription;
 
-  String get userId => _auth.currentUser?.uid ?? '';
+  String get userId {
+    final id = _auth.currentUser?.uid ?? '';
+    print('Current User ID: $id'); // Debug log
+    return id;
+  }
+
   @override
   void onInit() {
     super.onInit();
-    fetchFavorites();
-    fetchFavoritesData();
+    _initializeUserListeners();
+  }
+
+  @override
+  void onClose() {
+    _favoriteSubscription?.cancel();
+    super.onClose();
+  }
+
+  void _initializeUserListeners() {
+    FirebaseAuth.instance.authStateChanges().listen((User? user) {
+      if (user != null) {
+        clearData();
+        fetchFavorites();
+        fetchFavoritesData();
+      } else {
+        clearData();
+      }
+    });
   }
 
   Future<void> addToFavorites(Map<String, dynamic> business) async {
@@ -87,12 +107,9 @@ class FavoriteController extends GetxController {
     }
   }
 
-  bool isFavorite(String name) {
-    return favorites.any((item) => item['name'] == name);
-  }
-
   void fetchFavoritesData() {
-    FirebaseFirestore.instance
+    _favoriteSubscription?.cancel(); // Cancel old listener
+    _favoriteSubscription = FirebaseFirestore.instance
         .collection('users')
         .doc(userId)
         .collection('favorites')
@@ -112,6 +129,17 @@ class FavoriteController extends GetxController {
       favoriteList.value = favorites;
       filteredfavList.value = favorites;
     });
+  }
+
+  void clearData() {
+    favorites.clear();
+    favoriteList.clear();
+    filteredfavList.clear();
+    _favoriteSubscription?.cancel();
+  }
+
+  bool isFavorite(String name) {
+    return favorites.any((item) => item['name'] == name);
   }
 
   void filterList(String query) {

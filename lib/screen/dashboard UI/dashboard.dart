@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:nepaliapp/controller/dashboard%20Controller/business_data_controller.dart';
 import 'package:nepaliapp/utils/business_list_item.dart';
@@ -12,36 +13,36 @@ class DashboardScreen extends StatelessWidget {
     final controller = Get.put(BusinessDataController());
 
     return Scaffold(
-      body: SingleChildScrollView(
+      body: SafeArea(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            // Custom search bar
             CustomSearchBar(
               onSearch: (query) => controller.filterList(query),
             ),
-            const Padding(
-              padding: EdgeInsets.only(left: 12),
+            Padding(
+              padding: EdgeInsets.only(left: 12.w),
               child: Text(
                 'Trending Businesses',
-                style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
+                style: TextStyle(fontSize: 22.sp, fontWeight: FontWeight.bold),
               ),
             ),
-            Padding(
-              padding: const EdgeInsets.only(left: 12, right: 12),
-              child: Obx(
-                () {
-                  if (controller.filteredList.isEmpty) {
-                    return const Center(
-                      child: Text('No businesses found'),
-                    );
-                  }
-                  return SizedBox(
-                    height: MediaQuery.of(context).size.height * 0.65,
-                    child: ListView.separated(
+            Expanded(
+              child: Padding(
+                padding: EdgeInsets.symmetric(horizontal: 12.w),
+                child: Obx(
+                  () {
+                    if (controller.filteredList.isEmpty) {
+                      return Center(
+                        child: Text(
+                          'No businesses found',
+                          style: TextStyle(fontSize: 14.sp),
+                        ),
+                      );
+                    }
+                    return ListView.separated(
                       itemBuilder: (context, index) {
                         final business = controller.filteredList[index];
-
                         return BusinessListItem(
                           name: business['Name'],
                           imageUrl: business['ImageUrl'],
@@ -51,13 +52,11 @@ class DashboardScreen extends StatelessWidget {
                           description: business['Description'],
                         );
                       },
-                      separatorBuilder: (context, index) {
-                        return const Divider();
-                      },
+                      separatorBuilder: (context, index) => const Divider(),
                       itemCount: controller.filteredList.length,
-                    ),
-                  );
-                },
+                    );
+                  },
+                ),
               ),
             ),
           ],

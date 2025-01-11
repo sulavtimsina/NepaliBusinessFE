@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import 'package:nepaliapp/utils/utils.dart';
 
@@ -12,7 +13,7 @@ class CustomSearchBar extends StatelessWidget {
     final Utils utils = Utils();
 
     return Padding(
-      padding: const EdgeInsets.all(16.0),
+      padding: EdgeInsets.all(16.0.r),
       child: TextField(
           decoration: InputDecoration(
             hintText: 'Search...',
@@ -21,16 +22,16 @@ class CustomSearchBar extends StatelessWidget {
               onPressed: () {},
             ),
             border: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(18),
+              borderRadius: BorderRadius.circular(18.r),
               borderSide: const BorderSide(color: Colors.grey),
             ),
             focusedBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(18),
-              borderSide: BorderSide(color: utils.primaryColor, width: 2),
+              borderRadius: BorderRadius.circular(18.r),
+              borderSide: BorderSide(color: utils.primaryColor, width: 2.w),
             ),
-            contentPadding: const EdgeInsets.symmetric(
-              vertical: 20,
-              horizontal: 16,
+            contentPadding: EdgeInsets.symmetric(
+              vertical: 20.h,
+              horizontal: 16.w,
             ),
           ),
           onChanged: onSearch),

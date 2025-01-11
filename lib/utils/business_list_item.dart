@@ -1,5 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:nepaliapp/controller/dashboard%20Controller/favorite_controller.dart';
 import 'package:nepaliapp/screen/dashboard%20UI/details%20UI/business_detail.dart';
@@ -38,11 +39,11 @@ class BusinessListItem extends StatelessWidget {
             rating: rating));
       },
       leading: ClipRRect(
-        borderRadius: BorderRadius.circular(8),
+        borderRadius: BorderRadius.circular(8.r),
         child: CachedNetworkImage(
           imageUrl: imageUrl,
-          width: 80,
-          height: 80,
+          width: 80.w,
+          height: 80.h,
           fit: BoxFit.cover,
           placeholder: (context, url) => const Center(
             child: CircularProgressIndicator(),

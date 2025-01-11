@@ -1,5 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:nepaliapp/controller/dashboard%20Controller/location_controller.dart';
 import 'package:nepaliapp/utils/utils.dart';
@@ -33,79 +34,72 @@ class BusinessDetail extends StatelessWidget {
         backgroundColor: utils.primaryColor,
       ),
       body: SingleChildScrollView(
-        padding: const EdgeInsets.all(16.0),
+        padding: EdgeInsets.all(16.0.r),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             CachedNetworkImage(
               imageUrl: imageUrl,
-              height: 200,
-              width: double.infinity,
+              height: 200.h,
+              width: double.infinity.w,
               fit: BoxFit.cover,
               placeholder: (context, url) => const Center(
                 child: CircularProgressIndicator(),
               ),
               errorWidget: (context, url, error) => const Icon(Icons.error),
             ),
-            const SizedBox(height: 16),
+            SizedBox(height: 16.h),
             Text(
               name,
-              style: const TextStyle(
-                fontSize: 24,
+              style: TextStyle(
+                fontSize: 24.sp,
                 fontWeight: FontWeight.bold,
               ),
             ),
-            const SizedBox(height: 8),
-
+            SizedBox(height: 8.h),
             Text(
               'Category: $categoryBusiness',
-              style: const TextStyle(
-                fontSize: 16,
+              style: TextStyle(
+                fontSize: 16.sp,
                 color: Colors.black,
               ),
             ),
-            const SizedBox(height: 8),
-
-            // Location
+            SizedBox(height: 8.h),
             InkWell(
               onTap: () {
                 controller.openGoogleMaps(location);
               },
               child: Text(
                 'Location: $location',
-                style: const TextStyle(
-                  fontSize: 16,
+                style: TextStyle(
+                  fontSize: 16.sp,
                   color: Colors.black,
                 ),
               ),
             ),
-
-            const Text(
+            Text(
               'Description:',
               style: TextStyle(
-                fontSize: 18,
+                fontSize: 18.sp,
                 fontWeight: FontWeight.w600,
               ),
             ),
-
             Text(
               description,
-              style: const TextStyle(fontSize: 16, color: Colors.black87),
+              style: TextStyle(fontSize: 16.sp, color: Colors.black87),
               textAlign: TextAlign.justify,
             ),
-            const SizedBox(height: 16),
-
-            // Rating
+            SizedBox(height: 16.h),
             Row(
               children: [
-                const Text(
+                Text(
                   'Rating:',
                   style: TextStyle(
-                    fontSize: 18,
+                    fontSize: 18.sp,
                     fontWeight: FontWeight.w600,
                   ),
                 ),
-                const SizedBox(width: 8),
+                SizedBox(width: 8.w),
                 Row(
                   children: List.generate(5, (index) {
                     return Icon(

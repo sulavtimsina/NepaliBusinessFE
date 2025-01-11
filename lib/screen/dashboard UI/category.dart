@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:nepaliapp/screen/dashboard%20UI/details%20UI/category_detail_buz.dart';
+import 'package:nepaliapp/routes/route_names.dart';
 import 'package:nepaliapp/utils/custom_search_bar.dart';
 import '../../controller/dashboard Controller/category_controller.dart';
 
@@ -50,7 +50,12 @@ class CategoryScreen extends StatelessWidget {
                         controller.filteredCategories[index];
                     return GestureDetector(
                       onTap: () {
-                        Get.toNamed('detailScreen', arguments: displayCategory);
+                        Get.toNamed(
+                          RouteNames.detailScreen,
+                          arguments: {
+                            'categoryData': displayCategory,
+                          },
+                        );
                       },
                       child: Card(
                         elevation: 4,

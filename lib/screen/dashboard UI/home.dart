@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
 import 'package:nepaliapp/controller/dashboard%20Controller/navigation_controller.dart';
@@ -20,19 +21,26 @@ class Home extends StatelessWidget {
         centerTitle: true,
         automaticallyImplyLeading: false,
       ),
-      body: Obx(() => navigationController
-          .screens[navigationController.selectedIndex.value]),
+      body: SafeArea(
+        child: Obx(() {
+          return Padding(
+            padding: EdgeInsets.only(bottom: 0.5.h),
+            child: navigationController
+                .screens[navigationController.selectedIndex.value],
+          );
+        }),
+      ),
       bottomNavigationBar: Container(
         color: utils.navtextcolor,
         child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
+          padding: EdgeInsets.symmetric(horizontal: 15.w, vertical: 10.h),
           child: GNav(
             backgroundColor: utils.navtextcolor,
             color: utils.standardColor,
             activeColor: utils.secondaryColor,
             tabBackgroundColor: utils.primaryColor,
             gap: 8,
-            padding: const EdgeInsets.all(16),
+            padding: EdgeInsets.all(16.r),
             tabs: const [
               GButton(
                 icon: Icons.home,

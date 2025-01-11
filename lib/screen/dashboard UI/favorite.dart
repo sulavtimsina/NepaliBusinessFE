@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:nepaliapp/controller/dashboard%20Controller/favorite_controller.dart';
 import 'package:nepaliapp/utils/business_list_item.dart';
@@ -12,32 +13,34 @@ class FavoriteScreen extends StatelessWidget {
     final controller = Get.put(FavoriteController());
 
     return Scaffold(
-      body: SingleChildScrollView(
+      body: SafeArea(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             CustomSearchBar(
               onSearch: (query) => controller.filterList(query),
             ),
-            const Padding(
-              padding: EdgeInsets.only(left: 12),
+            Padding(
+              padding: EdgeInsets.only(left: 12.w),
               child: Text(
                 'Favourite',
-                style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
+                style: TextStyle(fontSize: 22.sp, fontWeight: FontWeight.bold),
               ),
             ),
-            Padding(
-              padding: const EdgeInsets.only(left: 12, right: 12),
-              child: Obx(
-                () {
-                  if (controller.filteredfavList.isEmpty) {
-                    return const Center(
-                      child: Text('No Favorite businesses found'),
-                    );
-                  }
-                  return SizedBox(
-                    height: MediaQuery.of(context).size.height * 0.65,
-                    child: ListView.separated(
+            Expanded(
+              child: Padding(
+                padding: EdgeInsets.symmetric(horizontal: 12.w),
+                child: Obx(
+                  () {
+                    if (controller.filteredfavList.isEmpty) {
+                      return Center(
+                        child: Text(
+                          'No Favorite businesses found',
+                          style: TextStyle(fontSize: 14.sp),
+                        ),
+                      );
+                    }
+                    return ListView.separated(
                       itemBuilder: (context, index) {
                         final business = controller.filteredfavList[index];
 
@@ -54,9 +57,9 @@ class FavoriteScreen extends StatelessWidget {
                         return const Divider();
                       },
                       itemCount: controller.filteredfavList.length,
-                    ),
-                  );
-                },
+                    );
+                  },
+                ),
               ),
             ),
           ],

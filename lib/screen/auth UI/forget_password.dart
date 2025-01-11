@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:nepaliapp/controller/authcontroller/reset_password_controller.dart';
 import 'package:nepaliapp/utils/utils.dart';
@@ -23,12 +24,10 @@ class ForgetPassword extends StatelessWidget {
       ),
       body: SingleChildScrollView(
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Container(
               width: screenWidth,
-              height: screenHeight * 0.25,
+              height: screenHeight * 0.25.h,
               color: Colors.white,
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -39,102 +38,106 @@ class ForgetPassword extends StatelessWidget {
                     style: TextStyle(
                         color: utils.secondaryColor,
                         fontWeight: FontWeight.bold,
-                        fontSize: 40),
+                        fontSize: 40.sp),
                   ),
-                  const SizedBox(
-                    height: 5,
+                  SizedBox(
+                    height: 5.h,
                   ),
                   Text(
                     utils.greeting,
                     style: TextStyle(
                         color: utils.standardColor,
                         fontWeight: FontWeight.normal,
-                        fontSize: 30),
+                        fontSize: 30.sp),
                   ),
-                  const SizedBox(
-                    height: 5,
+                  SizedBox(
+                    height: 5.h,
                   ),
                   Text(
                     utils.resetPageText,
                     style: TextStyle(
                         color: utils.secondaryColor,
                         fontWeight: FontWeight.normal,
-                        fontSize: 18),
-                  )
+                        fontSize: 18.sp),
+                  ),
                 ],
               ),
             ),
             Container(
               width: screenWidth,
+              height: screenHeight - (screenHeight * 0.25.h) - kToolbarHeight,
               color: utils.halfScreenColor,
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  SizedBox(
-                    width: screenWidth * 0.85,
-                    child: TextField(
-                      controller: resetPasswordController.emailController,
-                      keyboardType: TextInputType.emailAddress,
-                      decoration: InputDecoration(
-                        labelText: 'Email',
-                        labelStyle: TextStyle(color: utils.secondaryColor),
-                        hintText: 'Email',
-                        hintStyle: TextStyle(color: utils.secondaryColor),
-                        prefixIcon: const Icon(CupertinoIcons.mail_solid),
-                        filled: true,
-                        fillColor: Colors.white,
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(10),
-                          borderSide: const BorderSide(color: Colors.grey),
-                        ),
-                        focusedBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(10),
-                          borderSide: const BorderSide(
-                              color: Color.fromARGB(255, 11, 49, 13)),
+              child: SingleChildScrollView(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    SizedBox(
+                      width: screenWidth * 0.85.w,
+                      child: TextField(
+                        controller: resetPasswordController.emailController,
+                        keyboardType: TextInputType.emailAddress,
+                        decoration: InputDecoration(
+                          labelText: 'Email',
+                          labelStyle: TextStyle(color: utils.secondaryColor),
+                          hintText: 'Email',
+                          hintStyle: TextStyle(color: utils.secondaryColor),
+                          prefixIcon: const Icon(CupertinoIcons.mail_solid),
+                          filled: true,
+                          fillColor: Colors.white,
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(10.r),
+                            borderSide: const BorderSide(color: Colors.grey),
+                          ),
+                          focusedBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(10.r),
+                            borderSide: const BorderSide(
+                                color: Color.fromARGB(255, 11, 49, 13)),
+                          ),
                         ),
                       ),
                     ),
-                  ),
-                  const SizedBox(height: 16),
-                  InkWell(
-                    onTap: () {
-                      Get.toNamed('/registerScreen');
-                    },
-                    child: const Text(
-                      'New Here? Register Now',
-                      style: TextStyle(fontSize: 16, color: Color(0xff114c2b)),
-                    ),
-                  ),
-                  const SizedBox(
-                    height: 14,
-                  ),
-                  SizedBox(
-                    height: 45,
-                    width: screenWidth * 0.85,
-                    child: ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(5.0),
-                        ),
-                        backgroundColor: utils.primaryColor,
+                    SizedBox(height: 16.h),
+                    InkWell(
+                      onTap: () {
+                        Get.toNamed('/registerScreen');
+                      },
+                      child: Text(
+                        'New Here? Register Now',
+                        style: TextStyle(
+                            fontSize: 16.sp, color: utils.secondaryColor),
                       ),
-                      onPressed: resetPasswordController.isLoading.value
-                          ? null
-                          : resetPasswordController.sendResetPasswordEmail,
-                      child: Obx(() => resetPasswordController.isLoading.value
-                          ? CircularProgressIndicator(
-                              color: utils.secondaryColor,
-                            )
-                          : Text(
-                              'Reset',
-                              style: TextStyle(
-                                  color: utils.secondaryColor,
-                                  fontWeight: FontWeight.bold),
-                            )),
                     ),
-                  ),
-                ],
+                    SizedBox(
+                      height: 20.h,
+                    ),
+                    SizedBox(
+                      height: 45.h,
+                      width: screenWidth * 0.85.w,
+                      child: ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(5.0.r),
+                          ),
+                          backgroundColor: utils.primaryColor,
+                        ),
+                        onPressed: resetPasswordController.isLoading.value
+                            ? null
+                            : resetPasswordController.sendResetPasswordEmail,
+                        child: Obx(() => resetPasswordController.isLoading.value
+                            ? CircularProgressIndicator(
+                                color: utils.secondaryColor,
+                              )
+                            : Text(
+                                'Reset',
+                                style: TextStyle(
+                                    color: utils.secondaryColor,
+                                    fontWeight: FontWeight.bold),
+                              )),
+                      ),
+                    ),
+                  ],
+                ),
               ),
             ),
           ],
