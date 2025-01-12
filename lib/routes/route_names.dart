@@ -4,4 +4,5 @@ class RouteNames {
   static const String forgetScreen = '/forgetScreen';
   static const String home = '/home';
   static const String detailScreen = '/detailScreen';
+  static const String bussinesdetailScreen = '/bussinesdetailScreen';
 }

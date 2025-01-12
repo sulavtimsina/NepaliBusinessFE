@@ -66,195 +66,202 @@ class RegisterScreen extends StatelessWidget {
             ),
             Container(
               width: screenWidth,
+              height: screenHeight - (screenHeight * 0.25.h) - kToolbarHeight,
               color: utils.halfScreenColor,
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  SizedBox(
-                    width: screenWidth * 0.85.w,
-                    child: TextField(
-                      controller: registerController.nameController,
-                      keyboardType: TextInputType.emailAddress,
-                      decoration: InputDecoration(
-                        labelText: 'Name',
-                        labelStyle: TextStyle(color: utils.secondaryColor),
-                        hintText: 'Name',
-                        hintStyle: TextStyle(color: utils.secondaryColor),
-                        prefixIcon: const Icon(CupertinoIcons.person),
-                        filled: true,
-                        fillColor: Colors.white,
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(10.r),
-                          borderSide: const BorderSide(color: Colors.grey),
-                        ),
-                        focusedBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(10.r),
-                          borderSide: const BorderSide(
-                              color: Color.fromARGB(255, 11, 49, 13)),
-                        ),
-                      ),
-                    ),
-                  ),
-                  SizedBox(height: 12.h),
-                  SizedBox(
-                    width: screenWidth * 0.85.w,
-                    child: TextField(
-                      controller: registerController.emailController,
-                      keyboardType: TextInputType.emailAddress,
-                      decoration: InputDecoration(
-                        labelText: 'Email',
-                        labelStyle: TextStyle(color: utils.secondaryColor),
-                        hintText: 'Email',
-                        hintStyle: TextStyle(color: utils.secondaryColor),
-                        prefixIcon: const Icon(CupertinoIcons.mail_solid),
-                        filled: true,
-                        fillColor: Colors.white,
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(10.r),
-                          borderSide: const BorderSide(color: Colors.grey),
-                        ),
-                        focusedBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(10.r),
-                          borderSide: const BorderSide(
-                              color: Color.fromARGB(255, 11, 49, 13)),
-                        ),
-                      ),
-                    ),
-                  ),
-                  SizedBox(height: 12.h),
-                  SizedBox(
+              child: SingleChildScrollView(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    SizedBox(
                       width: screenWidth * 0.85.w,
-                      child: Obx(() {
-                        return TextField(
-                          controller: registerController.passwordController,
-                          keyboardType: TextInputType.text,
-                          obscureText: registerController.visiblePassword.value,
-                          decoration: InputDecoration(
-                            labelText: 'Password',
-                            labelStyle: TextStyle(color: utils.secondaryColor),
-                            hintText: 'Password',
-                            hintStyle: TextStyle(color: utils.secondaryColor),
-                            filled: true,
-                            prefixIcon: const Icon(CupertinoIcons.lock_fill),
-                            suffixIcon: IconButton(
-                                onPressed: () {
-                                  registerController.visiblePassword.value =
-                                      !registerController.visiblePassword.value;
-                                },
-                                icon: Icon(
-                                  registerController.visiblePassword.value
-                                      ? Icons.visibility_off
-                                      : Icons.visibility,
-                                  color:
-                                      registerController.visiblePassword.value
-                                          ? Colors.grey.shade500
-                                          : utils.secondaryColor,
-                                )),
-                            fillColor: Colors.white,
-                            border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(10.r),
-                              borderSide: const BorderSide(color: Colors.grey),
-                            ),
-                            focusedBorder: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(10.r),
-                              borderSide: const BorderSide(
-                                  color: Color.fromARGB(255, 11, 49, 13)),
-                            ),
+                      child: TextField(
+                        controller: registerController.nameController,
+                        keyboardType: TextInputType.emailAddress,
+                        decoration: InputDecoration(
+                          labelText: 'Name',
+                          labelStyle: TextStyle(color: utils.secondaryColor),
+                          hintText: 'Name',
+                          hintStyle: TextStyle(color: utils.secondaryColor),
+                          prefixIcon: const Icon(CupertinoIcons.person),
+                          filled: true,
+                          fillColor: Colors.white,
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(10.r),
+                            borderSide: const BorderSide(color: Colors.grey),
                           ),
-                        );
-                      })),
-                  SizedBox(height: 16.h),
-                  InkWell(
-                    onTap: () {
-                      Get.toNamed('/loginScreen');
-                    },
-                    child: Text(
-                      'Already Have Account? Login',
-                      style: TextStyle(
-                          fontSize: 16.sp, color: utils.secondaryColor),
+                          focusedBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(10.r),
+                            borderSide: const BorderSide(
+                                color: Color.fromARGB(255, 11, 49, 13)),
+                          ),
+                        ),
+                      ),
                     ),
-                  ),
-                  SizedBox(height: 16.h),
-                  Center(
-                    child: Row(
+                    SizedBox(height: 12.h),
+                    SizedBox(
+                      width: screenWidth * 0.85.w,
+                      child: TextField(
+                        controller: registerController.emailController,
+                        keyboardType: TextInputType.emailAddress,
+                        decoration: InputDecoration(
+                          labelText: 'Email',
+                          labelStyle: TextStyle(color: utils.secondaryColor),
+                          hintText: 'Email',
+                          hintStyle: TextStyle(color: utils.secondaryColor),
+                          prefixIcon: const Icon(CupertinoIcons.mail_solid),
+                          filled: true,
+                          fillColor: Colors.white,
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(10.r),
+                            borderSide: const BorderSide(color: Colors.grey),
+                          ),
+                          focusedBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(10.r),
+                            borderSide: const BorderSide(
+                                color: Color.fromARGB(255, 11, 49, 13)),
+                          ),
+                        ),
+                      ),
+                    ),
+                    SizedBox(height: 12.h),
+                    SizedBox(
+                        width: screenWidth * 0.85.w,
+                        child: Obx(() {
+                          return TextField(
+                            controller: registerController.passwordController,
+                            keyboardType: TextInputType.text,
+                            obscureText:
+                                registerController.visiblePassword.value,
+                            decoration: InputDecoration(
+                              labelText: 'Password',
+                              labelStyle:
+                                  TextStyle(color: utils.secondaryColor),
+                              hintText: 'Password',
+                              hintStyle: TextStyle(color: utils.secondaryColor),
+                              filled: true,
+                              prefixIcon: const Icon(CupertinoIcons.lock_fill),
+                              suffixIcon: IconButton(
+                                  onPressed: () {
+                                    registerController.visiblePassword.value =
+                                        !registerController
+                                            .visiblePassword.value;
+                                  },
+                                  icon: Icon(
+                                    registerController.visiblePassword.value
+                                        ? Icons.visibility_off
+                                        : Icons.visibility,
+                                    color:
+                                        registerController.visiblePassword.value
+                                            ? Colors.grey.shade500
+                                            : utils.secondaryColor,
+                                  )),
+                              fillColor: Colors.white,
+                              border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(10.r),
+                                borderSide:
+                                    const BorderSide(color: Colors.grey),
+                              ),
+                              focusedBorder: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(10.r),
+                                borderSide: const BorderSide(
+                                    color: Color.fromARGB(255, 11, 49, 13)),
+                              ),
+                            ),
+                          );
+                        })),
+                    SizedBox(height: 16.h),
+                    InkWell(
+                      onTap: () {
+                        Get.toNamed('/loginScreen');
+                      },
+                      child: Text(
+                        'Already Have Account? Login',
+                        style: TextStyle(
+                            fontSize: 16.sp, color: utils.secondaryColor),
+                      ),
+                    ),
+                    SizedBox(height: 10.h),
+                    Center(
+                      child: Row(
+                        children: [
+                          const Expanded(
+                            child: Divider(
+                              thickness: 1,
+                              color: Colors.grey,
+                            ),
+                          ),
+                          Padding(
+                            padding: EdgeInsets.symmetric(horizontal: 10.0.h),
+                            child: const Text(
+                              "or login with",
+                              style: TextStyle(color: Colors.grey),
+                            ),
+                          ),
+                          const Expanded(
+                            child: Divider(
+                              thickness: 1,
+                              color: Colors.grey,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
-                        const Expanded(
-                          child: Divider(
-                            thickness: 1,
-                            color: Colors.grey,
+                        GestureDetector(
+                          onTap: () {
+                            registerController.signInwithGoogle();
+                          },
+                          child: Image.asset(
+                            'assets/search.png',
+                            width: screenWidth * 0.15.w,
+                            height: screenHeight * 0.15.h,
                           ),
                         ),
-                        Padding(
-                          padding: EdgeInsets.symmetric(horizontal: 10.0.h),
-                          child: const Text(
-                            "or login with",
-                            style: TextStyle(color: Colors.grey),
-                          ),
-                        ),
-                        const Expanded(
-                          child: Divider(
-                            thickness: 1,
-                            color: Colors.grey,
+                        GestureDetector(
+                          onTap: () {
+                            registerController.signInWithFacebook();
+                          },
+                          child: Image.asset(
+                            'assets/facebook.png',
+                            width: screenWidth * 0.15.w,
+                            height: screenHeight * 0.15.h,
                           ),
                         ),
                       ],
                     ),
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [
-                      GestureDetector(
-                        onTap: () {
-                          registerController.signInwithGoogle();
-                        },
-                        child: Image.asset(
-                          'assets/search.png',
-                          width: screenWidth * 0.15.w,
-                          height: screenHeight * 0.15.h,
+                    SizedBox(
+                      height: 45,
+                      width: screenWidth * 0.85.w,
+                      child: ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(5.0.r),
+                          ),
+                          backgroundColor: utils.primaryColor,
                         ),
+                        onPressed: registerController.isLoading.value
+                            ? null
+                            : registerController.signUpAndSaveToFirestore,
+                        child: Obx(() => registerController.isLoading.value
+                            ? CircularProgressIndicator(
+                                color: utils.secondaryColor,
+                              )
+                            : Text(
+                                'Register',
+                                style: TextStyle(
+                                    color: utils.secondaryColor,
+                                    fontWeight: FontWeight.bold),
+                              )),
                       ),
-                      GestureDetector(
-                        onTap: () {
-                          registerController.signInWithFacebook();
-                        },
-                        child: Image.asset(
-                          'assets/facebook.png',
-                          width: screenWidth * 0.15.w,
-                          height: screenHeight * 0.15.h,
-                        ),
-                      ),
-                    ],
-                  ),
-                  SizedBox(
-                    height: screenHeight * 0.1.h,
-                  ),
-                  SizedBox(
-                    height: 45,
-                    width: screenWidth * 0.85.w,
-                    child: ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(5.0.r),
-                        ),
-                        backgroundColor: utils.primaryColor,
-                      ),
-                      onPressed: registerController.isLoading.value
-                          ? null
-                          : registerController.signUpAndSaveToFirestore,
-                      child: Obx(() => registerController.isLoading.value
-                          ? CircularProgressIndicator(
-                              color: utils.secondaryColor,
-                            )
-                          : Text(
-                              'Register',
-                              style: TextStyle(
-                                  color: utils.secondaryColor,
-                                  fontWeight: FontWeight.bold),
-                            )),
                     ),
-                  )
-                ],
+                    SizedBox(
+                      height: screenHeight * 0.03.h,
+                    ),
+                  ],
+                ),
               ),
             ),
           ],

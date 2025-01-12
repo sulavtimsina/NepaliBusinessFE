@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:nepaliapp/controller/dashboard%20Controller/favorite_controller.dart';
-import 'package:nepaliapp/screen/dashboard%20UI/details%20UI/business_detail.dart';
+import 'package:nepaliapp/routes/route_names.dart';
 
 class BusinessListItem extends StatelessWidget {
   final String name;
@@ -30,13 +30,14 @@ class BusinessListItem extends StatelessWidget {
 
     return ListTile(
       onTap: () {
-        Get.to(BusinessDetail(
-            imageUrl: imageUrl,
-            name: name,
-            categoryBusiness: category,
-            location: location,
-            description: description,
-            rating: rating));
+        Get.toNamed(RouteNames.bussinesdetailScreen, arguments: {
+          'imageUrl': imageUrl,
+          'name': name,
+          'categoryBusiness': category,
+          'location': location,
+          'description': description,
+          'rating': rating
+        });
       },
       leading: ClipRRect(
         borderRadius: BorderRadius.circular(8.r),

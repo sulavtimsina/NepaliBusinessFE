@@ -27,6 +27,13 @@ class BusinessDetail extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final LocationController controller = Get.put(LocationController());
+    final String imageUrl = Get.arguments['imageUrl'];
+    final String name = Get.arguments['name'];
+    final String categoryBusiness = Get.arguments['categoryBusiness'];
+    final String location = Get.arguments['location'];
+    final String description = Get.arguments['description'];
+    final int rating = Get.arguments['rating'];
+
     return Scaffold(
       appBar: AppBar(
         title: Text(utils.name),
@@ -72,9 +79,9 @@ class BusinessDetail extends StatelessWidget {
               child: Text(
                 'Location: $location',
                 style: TextStyle(
-                  fontSize: 16.sp,
-                  color: Colors.black,
-                ),
+                    fontSize: 16.sp,
+                    color: Colors.black,
+                    fontWeight: FontWeight.bold),
               ),
             ),
             Text(
