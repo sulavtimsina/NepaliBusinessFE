@@ -16,7 +16,7 @@ class AuthControllerState extends GetxController {
 
   Future<void> signOut() async {
     await _firebaseAuth.signOut();
-    Get.to('/loginScreen');
+    Get.offAllNamed('/loginScreen');
   }
 
   User? get currentUser => firebaseUser.value;

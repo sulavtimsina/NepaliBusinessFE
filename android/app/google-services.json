@@ -1,45 +1,36 @@
 {
   "project_info": {
-    "project_number": "157850856962",
-    "project_id": "nepalibusiness-8c8a0",
-    "storage_bucket": "nepalibusiness-8c8a0.firebasestorage.app"
+    "project_number": "92485715753",
+    "project_id": "nepali-business",
+    "storage_bucket": "nepali-business.firebasestorage.app"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:157850856962:android:24cce10f5919fbef83c11b",
+        "mobilesdk_app_id": "1:92485715753:android:bd7ee942c7b48e9927d938",
         "android_client_info": {
           "package_name": "com.example.nepaliapp"
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "92485715753-bukqcqsaegdgfmehf41mc2nc6tdd79bb.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
       "api_key": [
         {
-          "current_key": "AIzaSyAKC8-IwT5jf7GI8gWNPE__CoGoEYoKwmg"
+          "current_key": "AIzaSyB-KKabWG_nn8vukltpPYoC1-A5rHULnuU"
         }
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": []
-        }
-      }
-    },
-    {
-      "client_info": {
-        "mobilesdk_app_id": "1:157850856962:android:d78bbb035062cf7283c11b",
-        "android_client_info": {
-          "package_name": "com.example.nepalibussiness"
-        }
-      },
-      "oauth_client": [],
-      "api_key": [
-        {
-          "current_key": "AIzaSyAKC8-IwT5jf7GI8gWNPE__CoGoEYoKwmg"
-        }
-      ],
-      "services": {
-        "appinvite_service": {
-          "other_platform_oauth_client": []
+          "other_platform_oauth_client": [
+            {
+              "client_id": "92485715753-bukqcqsaegdgfmehf41mc2nc6tdd79bb.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
         }
       }
     }
