@@ -4,7 +4,7 @@
          <provider android:authorities="com.facebook.katana.provider.PlatformProvider" />
      </queries>
     <application
-        android:label="nepaliapp"
+        android:label="KhojBiz"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity

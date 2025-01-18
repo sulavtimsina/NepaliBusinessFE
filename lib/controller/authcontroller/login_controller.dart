@@ -56,6 +56,8 @@ class LoginController extends GetxController {
         emailController.clear();
         passwordController.clear();
       });
+      emailController.clear();
+      passwordController.clear();
     } on FirebaseAuthException catch (e) {
       if (e.code == 'user-not-found') {
         utils.showSnackbar("Error", "Email is incorrect");
