@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:get/get.dart';
+import 'dart:math';
 
 class BusinessDataController extends GetxController {
   Stream<QuerySnapshot> get businessStream =>
@@ -51,5 +52,11 @@ class BusinessDataController extends GetxController {
                   .contains(query.toLowerCase()))
           .toList();
     }
+  }
+
+  List<Map<String, dynamic>> getRandomBusinesses(int count) {
+    final shuffled = List<Map<String, dynamic>>.from(filteredList);
+    shuffled.shuffle(Random());
+    return shuffled.take(count).toList();
   }
 }

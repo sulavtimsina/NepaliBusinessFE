@@ -40,9 +40,10 @@ class DashboardScreen extends StatelessWidget {
                         ),
                       );
                     }
+                    final randomList = controller.getRandomBusinesses(10);
                     return ListView.separated(
                       itemBuilder: (context, index) {
-                        final business = controller.filteredList[index];
+                        final business = randomList[index];
                         return BusinessListItem(
                           name: business['Name'],
                           imageUrl: business['ImageUrl'],
@@ -53,7 +54,7 @@ class DashboardScreen extends StatelessWidget {
                         );
                       },
                       separatorBuilder: (context, index) => const Divider(),
-                      itemCount: controller.filteredList.length,
+                      itemCount: randomList.length,
                     );
                   },
                 ),
