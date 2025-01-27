@@ -12,6 +12,21 @@ class BusinessListItem extends StatelessWidget {
   final String location;
   final String description;
   final int rating;
+  final String ownerName;
+  final String contactNumber;
+  final String emailAddress;
+  final String websiteURL;
+  final String facebook;
+  final String instagram;
+  final String city;
+  final String state;
+  final String zipCode;
+  final String country;
+  final String languageSpoken;
+  final String operatingHours;
+  final String paymentMethod;
+  final String specialOffers;
+  final String verificationStatus;
 
   const BusinessListItem({
     super.key,
@@ -21,6 +36,21 @@ class BusinessListItem extends StatelessWidget {
     required this.rating,
     required this.location,
     required this.description,
+    required this.ownerName,
+    required this.contactNumber,
+    required this.emailAddress,
+    required this.websiteURL,
+    required this.facebook,
+    required this.instagram,
+    required this.city,
+    required this.state,
+    required this.zipCode,
+    required this.country,
+    required this.languageSpoken,
+    required this.operatingHours,
+    required this.paymentMethod,
+    required this.specialOffers,
+    required this.verificationStatus,
   });
 
   @override
@@ -36,7 +66,22 @@ class BusinessListItem extends StatelessWidget {
           'categoryBusiness': category,
           'location': location,
           'description': description,
-          'rating': rating
+          'rating': rating,
+          'ownerName': ownerName,
+          'contactNumber': contactNumber,
+          'emailAddress': emailAddress,
+          'websiteURL': websiteURL,
+          'facebook': facebook,
+          'instagram': instagram,
+          'city': city,
+          'stateRegion': state,
+          'zipcode': zipCode,
+          'country': country,
+          'languageSpoken': languageSpoken,
+          'operatingHours': operatingHours,
+          'paymentMethods': paymentMethod,
+          'specialOffers': specialOffers,
+          'verificationStatus': verificationStatus,
         });
       },
       leading: ClipRRect(
@@ -85,6 +130,21 @@ class BusinessListItem extends StatelessWidget {
                 'location': location,
                 'description': description,
                 'rating': rating,
+                'ownerName': ownerName,
+                'contactNumber': contactNumber,
+                'emailAddress': emailAddress,
+                'websiteURL': websiteURL,
+                'facebook': facebook,
+                'instagram': instagram,
+                'city': city,
+                'stateRegion': state,
+                'zipcode': zipCode,
+                'country': country,
+                'languageSpoken': languageSpoken,
+                'operatingHours': operatingHours,
+                'paymentMethods': paymentMethod,
+                'specialOffers': specialOffers,
+                'verificationStatus': verificationStatus,
               };
               favoritesController.addToFavorites(businessData);
             }

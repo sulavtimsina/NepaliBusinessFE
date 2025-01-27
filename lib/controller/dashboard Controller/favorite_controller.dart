@@ -14,7 +14,7 @@ class FavoriteController extends GetxController {
 
   String get userId {
     final id = _auth.currentUser?.uid ?? '';
-    print('Current User ID: $id'); // Debug log
+    print('Current User ID: $id');
     return id;
   }
 
@@ -108,7 +108,7 @@ class FavoriteController extends GetxController {
   }
 
   void fetchFavoritesData() {
-    _favoriteSubscription?.cancel(); // Cancel old listener
+    _favoriteSubscription?.cancel();
     _favoriteSubscription = FirebaseFirestore.instance
         .collection('users')
         .doc(userId)
@@ -117,12 +117,27 @@ class FavoriteController extends GetxController {
         .listen((snapshot) {
       final favorites = snapshot.docs.map((doc) {
         return {
-          'Name': doc['name'],
-          'ImageUrl': doc['imageUrl'],
-          'Category': doc['category'],
-          'Rating': doc['rating'],
-          'Location': doc['location'],
-          'Description': doc['description'],
+          'Name': doc['name'] ?? 'N/A',
+          'ImageUrl': doc['imageUrl'] ?? 'N/A',
+          'Category': doc['category'] ?? 'N/A',
+          'Rating': doc['rating'] ?? 0,
+          'Location': doc['location'] ?? 'N/A',
+          'Description': doc['description'] ?? 'N/A',
+          'OwnerName': doc['ownerName'] ?? 'N/A',
+          'ContactNumber': doc['contactNumber'] ?? 'N/A',
+          'EmailAddress': doc['emailAddress'] ?? 'N/A',
+          'WebsiteURL': doc['websiteURL'] ?? '',
+          'Facebook': doc['facebook'] ?? '',
+          'Instagram': doc['instagram'] ?? '',
+          'City': doc['city'] ?? 'N/A',
+          'StateRegion': doc['stateRegion'] ?? 'N/A',
+          'Zipcode': doc['zipcode'] ?? 'N/A',
+          'Country': doc['country'] ?? 'N/A',
+          'LanguageSpoken': doc['languageSpoken'] ?? 'N/A',
+          'OperatingHours': doc['operatingHours'] ?? 'N/A',
+          'PaymentMethods': doc['paymentMethods'] ?? 'N/A',
+          'SpecialOffers': doc['specialOffers'] ?? 'N/A',
+          'VerificationStatus': doc['verificationStatus'] ?? 'N/A',
         };
       }).toList();
 

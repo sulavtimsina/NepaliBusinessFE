@@ -22,12 +22,27 @@ class BusinessDataController extends GetxController {
       final businesses = snapshot.docs.map((doc) {
         return {
           'id': doc.id,
-          'Name': doc['Name'],
-          'ImageUrl': doc['ImageUrl'],
-          'Category': doc['Category'],
-          'Rating': doc['Rating'],
-          'Location': doc['Location'],
-          'Description': doc['Description'],
+          'Name': doc['Name'] ?? 'N/A',
+          'ImageUrl': doc['ImageUrl'] ?? '',
+          'Category': doc['Category'] ?? 'N/A',
+          'Rating': doc['Rating'] ?? 0.0,
+          'Location': doc['Location'] ?? 'N/A',
+          'Description': doc['Description'] ?? 'N/A',
+          'OwnerName': doc['OwnerName'] ?? 'N/A',
+          'ContactNumber': doc['ContactNumber'] ?? 'N/A',
+          'EmailAddress': doc['EmailAddress'] ?? 'N/A',
+          'WebsiteURL': doc['WebsiteURL'] ?? '',
+          'Facebook': doc['Facebook'] ?? '',
+          'Instagram': doc['Instagram'] ?? '',
+          'City': doc['City'] ?? 'N/A',
+          'StateRegion': doc['StateRegion'] ?? 'N/A',
+          'Zipcode': doc['Zipcode'] ?? 'N/A',
+          'Country': doc['Country'] ?? 'N/A',
+          'LanguageSpoken': doc['LanguageSpoken'] ?? 'N/A',
+          'OperatingHours': doc['OperatingHours'] ?? 'N/A',
+          'PaymentMethods': doc['PaymentMethods'] ?? 'N/A',
+          'SpecialOffers': doc['SpecialOffers'] ?? 'N/A',
+          'VerificationStatus': doc['VerificationStatus'] ?? 'N/A',
         };
       }).toList();
 
