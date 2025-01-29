@@ -14,23 +14,22 @@
       },
       "oauth_client": [
         {
-          "client_id": "92485715753-bukqcqsaegdgfmehf41mc2nc6tdd79bb.apps.googleusercontent.com",
-          "client_type": 3
+          "client_id": "92485715753-gugu6alra901aiab6nbo1tuh4vdd9kk9.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.nepaliapp",
+            "certificate_hash": "0b5c10bc355a3ef8822b1b41c851ea0a57349122"
+          }
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyB-KKabWG_nn8vukltpPYoC1-A5rHULnuU"
+          "current_key": "AIzaSyDWy2NNd-iQpR3CDQmysA5dlzBIISkH6wU"
         }
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": [
-            {
-              "client_id": "92485715753-bukqcqsaegdgfmehf41mc2nc6tdd79bb.apps.googleusercontent.com",
-              "client_type": 3
-            }
-          ]
+          "other_platform_oauth_client": []
         }
       }
     }

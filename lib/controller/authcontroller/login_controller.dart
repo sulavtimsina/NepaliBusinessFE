@@ -110,6 +110,7 @@ class LoginController extends GetxController {
           'createdAt': FieldValue.serverTimestamp(),
         }, SetOptions(merge: true));
       }
+      Get.toNamed('/home');
     } finally {
       isLoading.value = false;
     }
@@ -139,6 +140,7 @@ class LoginController extends GetxController {
             'createdAt': FieldValue.serverTimestamp(),
           }, SetOptions(merge: true));
         }
+        Get.toNamed('/home');
       } else {}
     } finally {
       isLoading.value = false;
