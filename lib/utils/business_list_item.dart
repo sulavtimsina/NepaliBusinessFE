@@ -107,7 +107,7 @@ class BusinessListItem extends StatelessWidget {
               if (index < rating.floor()) {
                 // Full star
                 return const Icon(Icons.star, color: Colors.amber);
-              } else if (index < rating && rating - index >= 0.5) {
+              } else if (index < rating) {
                 // Half star
                 return const Icon(Icons.star_half, color: Colors.amber);
               } else {
