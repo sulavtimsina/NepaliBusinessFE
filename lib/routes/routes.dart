@@ -45,7 +45,7 @@ class AppRoutes {
                   categoryBusiness: Get.arguments['categoryBusiness'] ?? 'N/A',
                   location: Get.arguments['location'] ?? 'N/A',
                   description: Get.arguments['description'] ?? 'N/A',
-                  rating: Get.arguments['rating'] ?? 0,
+                  rating: Get.arguments['rating'] ?? 0.0,
                   ownerName: Get.arguments['ownerName'] ?? 'N/A',
                   contactNumber: Get.arguments['contactNumber'] ?? 'N/A',
                   emailAddress: Get.arguments['emailAddress'] ?? 'N/A',

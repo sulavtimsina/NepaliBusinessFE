@@ -11,7 +11,7 @@ class BusinessListItem extends StatelessWidget {
   final String category;
   final String location;
   final String description;
-  final int rating;
+  final double rating;
   final String ownerName;
   final String contactNumber;
   final String emailAddress;
@@ -104,12 +104,18 @@ class BusinessListItem extends StatelessWidget {
           Text(category),
           Row(
             children: List.generate(5, (index) {
-              return Icon(
-                index < rating ? Icons.star : Icons.star_border,
-                color: Colors.amber,
-              );
+              if (index < rating.floor()) {
+                // Full star
+                return const Icon(Icons.star, color: Colors.amber);
+              } else if (index < rating && rating - index >= 0.5) {
+                // Half star
+                return const Icon(Icons.star_half, color: Colors.amber);
+              } else {
+                // Empty star
+                return const Icon(Icons.star_border, color: Colors.amber);
+              }
             }),
-          ),
+          )
         ],
       ),
       trailing: Obx(() {

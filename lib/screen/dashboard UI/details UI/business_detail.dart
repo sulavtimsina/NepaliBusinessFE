@@ -15,7 +15,7 @@ class BusinessDetail extends StatelessWidget {
   final String categoryBusiness;
   final String location;
   final String description;
-  final int rating;
+  final double rating;
   final String ownerName;
   final String contactNumber;
   final String emailAddress;
@@ -507,12 +507,18 @@ class BusinessDetail extends StatelessWidget {
                 SizedBox(width: 8.w),
                 Row(
                   children: List.generate(5, (index) {
-                    return Icon(
-                      index < rating ? Icons.star : Icons.star_border,
-                      color: Colors.amber,
-                    );
+                    if (index < rating.floor()) {
+                      // Full star
+                      return const Icon(Icons.star, color: Colors.amber);
+                    } else if (index < rating && rating - index >= 0.5) {
+                      // Half star
+                      return const Icon(Icons.star_half, color: Colors.amber);
+                    } else {
+                      // Empty star
+                      return const Icon(Icons.star_border, color: Colors.amber);
+                    }
                   }),
-                ),
+                )
               ],
             ),
           ],
