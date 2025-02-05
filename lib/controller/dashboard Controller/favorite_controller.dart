@@ -14,7 +14,6 @@ class FavoriteController extends GetxController {
 
   String get userId {
     final id = _auth.currentUser?.uid ?? '';
-    print('Current User ID: $id');
     return id;
   }
 
@@ -117,10 +116,11 @@ class FavoriteController extends GetxController {
         .listen((snapshot) {
       final favorites = snapshot.docs.map((doc) {
         return {
+          'id': doc.id,
           'Name': doc['name'] ?? 'N/A',
-          'ImageUrl': doc['imageUrl'] ?? 'N/A',
+          'ImageUrl': doc['imageUrl'] ?? '',
           'Category': doc['category'] ?? 'N/A',
-          'Rating': doc['rating'] ?? 0,
+          'Rating': double.tryParse(doc['rating'].toString()) ?? 0.0,
           'Location': doc['location'] ?? 'N/A',
           'Description': doc['description'] ?? 'N/A',
           'OwnerName': doc['ownerName'] ?? 'N/A',
