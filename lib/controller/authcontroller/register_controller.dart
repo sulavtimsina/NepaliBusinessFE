@@ -105,7 +105,7 @@ class RegisterController extends GetxController {
           'createdAt': FieldValue.serverTimestamp(),
         }, SetOptions(merge: true));
       }
-      Get.back();
+      Get.toNamed('/home');
     } finally {
       isLoading.value = false;
     }
@@ -135,7 +135,7 @@ class RegisterController extends GetxController {
             'createdAt': FieldValue.serverTimestamp(),
           }, SetOptions(merge: true));
         }
-        Get.back();
+        Get.toNamed('/home');
       } else {}
     } finally {
       isLoading.value = false;

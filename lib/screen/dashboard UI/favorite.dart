@@ -46,11 +46,11 @@ class FavoriteScreen extends StatelessWidget {
 
                         return BusinessListItem(
                           name: business['Name'],
-                          imageUrl: business['ImageUrl'],
-                          category: business['Category'],
-                          rating: business['Rating'],
-                          location: business['Location'],
-                          description: business['Description'],
+                          imageUrl: business['ImageUrl'] ?? 'N/A',
+                          category: business['Category'] ?? 'N/A',
+                          rating: business['Rating'] ?? 'N/A',
+                          location: business['Location'] ?? 'N/A',
+                          description: business['Description'] ?? 'N/A',
                           ownerName: business['OwnerName'] ?? 'N/A',
                           contactNumber: business['ContactNumber'] ?? 'N/A',
                           emailAddress: business['EmailAddress'] ?? 'N/A',
