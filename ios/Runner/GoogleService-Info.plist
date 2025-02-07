@@ -3,9 +3,11 @@
 <plist version="1.0">
 <dict>
 	<key>CLIENT_ID</key>
-	<string>92485715753-kha5ojc0jctoq2hmleq8qh05vli7e7kv.apps.googleusercontent.com</string>
+	<string>92485715753-hch27kk5sri5e8fcp68vq2s4q4m1b2tc.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.92485715753-kha5ojc0jctoq2hmleq8qh05vli7e7kv</string>
+	<string>com.googleusercontent.apps.92485715753-hch27kk5sri5e8fcp68vq2s4q4m1b2tc</string>
+	<key>ANDROID_CLIENT_ID</key>
+	<string>92485715753-gugu6alra901aiab6nbo1tuh4vdd9kk9.apps.googleusercontent.com</string>
 	<key>API_KEY</key>
 	<string>AIzaSyBpHeXaJLnT0k1DBSflWMXP3ISm68MuDn8</string>
 	<key>GCM_SENDER_ID</key>
@@ -13,7 +15,7 @@
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
-	<string>com.example.nepaliapp</string>
+	<string>com.nepaliapp.khojbiz</string>
 	<key>PROJECT_ID</key>
 	<string>nepali-business</string>
 	<key>STORAGE_BUCKET</key>
@@ -29,6 +31,6 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:92485715753:ios:c7ccea081f065af727d938</string>
+	<string>1:92485715753:ios:77f7a874ab6284b727d938</string>
 </dict>
 </plist>

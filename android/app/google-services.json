@@ -7,19 +7,15 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:92485715753:android:bd7ee942c7b48e9927d938",
+        "mobilesdk_app_id": "1:92485715753:android:d626b64a204961d427d938",
         "android_client_info": {
-          "package_name": "com.example.nepaliapp"
+          "package_name": "com.nepaliapp.khojbiz"
         }
       },
       "oauth_client": [
         {
-          "client_id": "92485715753-gugu6alra901aiab6nbo1tuh4vdd9kk9.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "com.example.nepaliapp",
-            "certificate_hash": "0b5c10bc355a3ef8822b1b41c851ea0a57349122"
-          }
+          "client_id": "92485715753-bukqcqsaegdgfmehf41mc2nc6tdd79bb.apps.googleusercontent.com",
+          "client_type": 3
         }
       ],
       "api_key": [
@@ -29,7 +25,19 @@
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": []
+          "other_platform_oauth_client": [
+            {
+              "client_id": "92485715753-bukqcqsaegdgfmehf41mc2nc6tdd79bb.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "92485715753-hch27kk5sri5e8fcp68vq2s4q4m1b2tc.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.nepaliapp.khojbiz"
+              }
+            }
+          ]
         }
       }
     }
