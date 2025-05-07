@@ -5,6 +5,8 @@ import 'package:nepaliapp/controller/dashboard%20Controller/favorite_controller.
 import 'package:nepaliapp/utils/business_list_item.dart';
 import 'package:nepaliapp/utils/custom_search_bar.dart';
 
+import '../../model/business.dart';
+
 class FavoriteScreen extends StatelessWidget {
   const FavoriteScreen({super.key});
 
@@ -42,32 +44,9 @@ class FavoriteScreen extends StatelessWidget {
                     }
                     return ListView.separated(
                       itemBuilder: (context, index) {
-                        final business = controller.filteredfavList[index];
-
-                        return BusinessListItem(
-                          name: business['Name'],
-                          imageUrl: business['ImageUrl'] ?? 'N/A',
-                          category: business['Category'] ?? 'N/A',
-                          rating: business['Rating'] ?? 'N/A',
-                          location: business['Location'] ?? 'N/A',
-                          description: business['Description'] ?? 'N/A',
-                          ownerName: business['OwnerName'] ?? 'N/A',
-                          contactNumber: business['ContactNumber'] ?? 'N/A',
-                          emailAddress: business['EmailAddress'] ?? 'N/A',
-                          websiteURL: business['WebsiteURL'] ?? '',
-                          facebook: business['Facebook'] ?? '',
-                          instagram: business['Instagram'] ?? '',
-                          city: business['City'] ?? 'N/A',
-                          state: business['StateRegion'] ?? 'N/A',
-                          zipCode: business['Zipcode'] ?? 'N/A',
-                          country: business['Country'] ?? 'N/A',
-                          languageSpoken: business['LanguageSpoken'] ?? 'N/A',
-                          operatingHours: business['OperatingHours'] ?? 'N/A',
-                          paymentMethod: business['PaymentMethods'] ?? 'N/A',
-                          specialOffers: business['SpecialOffers'] ?? 'N/A',
-                          verificationStatus:
-                              business['VerificationStatus'] ?? 'N/A',
-                        );
+                        final Business business =
+                            controller.filteredfavList[index];
+                        return BusinessListItem(business: business);
                       },
                       separatorBuilder: (context, index) {
                         return const Divider();

@@ -5,6 +5,8 @@ import 'package:google_nav_bar/google_nav_bar.dart';
 import 'package:nepaliapp/controller/dashboard%20Controller/navigation_controller.dart';
 import 'package:nepaliapp/utils/utils.dart';
 
+import '../../controller/authcontroller/auth_controller_state.dart';
+
 class Home extends StatelessWidget {
   const Home({super.key});
 
@@ -12,6 +14,8 @@ class Home extends StatelessWidget {
   Widget build(BuildContext context) {
     final NavigationController navigationController =
         Get.put(NavigationController());
+    AuthControllerState authControllerState = Get.put(AuthControllerState());
+
 
     final Utils utils = Utils();
     return Scaffold(
@@ -20,7 +24,13 @@ class Home extends StatelessWidget {
         backgroundColor: utils.primaryColor,
         centerTitle: true,
         automaticallyImplyLeading: false,
+        actions: [
+          IconButton(icon: const Icon(Icons.logout),
+            tooltip: 'Logout',
+            onPressed: () =>authControllerState.signOut())
+        ],
       ),
+
       body: SafeArea(
         child: Obx(() {
           return Padding(
@@ -53,10 +63,6 @@ class Home extends StatelessWidget {
               GButton(
                 icon: Icons.favorite,
                 text: 'Favorite',
-              ),
-              GButton(
-                icon: Icons.person_2_rounded,
-                text: 'Profile',
               ),
             ],
             onTabChange: (index) {

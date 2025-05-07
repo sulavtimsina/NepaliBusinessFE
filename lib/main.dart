@@ -4,7 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:nepaliapp/controller/authcontroller/auth_controller_state.dart';
 import 'package:nepaliapp/routes/routes.dart';
-import 'package:nepaliapp/screen/root_screen.dart';
+import 'package:nepaliapp/screen/dashboard%20UI/home.dart';
 import 'package:nepaliapp/utils/utils.dart';
 
 void main() async {
@@ -27,7 +27,7 @@ class MyApp extends StatelessWidget {
             colorScheme: ColorScheme.fromSeed(seedColor: Utils().primaryColor),
             useMaterial3: true,
           ),
-          home: const RootScreen(),
+          home: const Home(),
           getPages: AppRoutes.appRoutes()),
     );
   }

@@ -4,12 +4,15 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get/get.dart';
 
+import '../../model/business.dart';
+
 class FavoriteController extends GetxController {
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
   final FirebaseAuth _auth = FirebaseAuth.instance;
-  final RxList<Map<String, dynamic>> favorites = <Map<String, dynamic>>[].obs;
-  final favoriteList = <Map<String, dynamic>>[].obs;
-  final filteredfavList = <Map<String, dynamic>>[].obs;
+  final RxList<Business> favorites = <Business>[].obs;
+  final favoriteList = <Business>[].obs;
+  final filteredfavList = <Business>[].obs;
+
   StreamSubscription? _favoriteSubscription;
 
   String get userId {
@@ -41,7 +44,7 @@ class FavoriteController extends GetxController {
     });
   }
 
-  Future<void> addToFavorites(Map<String, dynamic> business) async {
+  Future<void> addToFavorites(Business business) async {
     if (userId.isEmpty) {
       Get.snackbar('Error', 'User not logged in');
       return;
@@ -52,7 +55,7 @@ class FavoriteController extends GetxController {
           .collection('users')
           .doc(userId)
           .collection('favorites')
-          .add(business);
+          .add(business.toJson());
 
       Get.snackbar('Success', 'Added to favorites');
     } catch (e) {
@@ -67,12 +70,13 @@ class FavoriteController extends GetxController {
     }
 
     try {
-      favorites.removeWhere((item) => item['name'] == name);
+      favorites.removeWhere((item) => item.name == name);
+
       final QuerySnapshot snapshot = await _firestore
           .collection('users')
           .doc(userId)
           .collection('favorites')
-          .where('name', isEqualTo: name)
+          .where('Name', isEqualTo: name)
           .get();
 
       for (var doc in snapshot.docs) {
@@ -99,7 +103,7 @@ class FavoriteController extends GetxController {
           .get();
 
       favorites.value = snapshot.docs
-          .map((doc) => doc.data() as Map<String, dynamic>)
+          .map((doc) => Business.fromJson(doc.data() as Map<String, dynamic>))
           .toList();
     } catch (e) {
       Get.snackbar('Error', 'Failed to fetch favorites: $e');
@@ -114,35 +118,12 @@ class FavoriteController extends GetxController {
         .collection('favorites')
         .snapshots()
         .listen((snapshot) {
-      final favorites = snapshot.docs.map((doc) {
-        return {
-          'id': doc.id,
-          'Name': doc['name'] ?? 'N/A',
-          'ImageUrl': doc['imageUrl'] ?? '',
-          'Category': doc['category'] ?? 'N/A',
-          'Rating': double.tryParse(doc['rating'].toString()) ?? 0.0,
-          'Location': doc['location'] ?? 'N/A',
-          'Description': doc['description'] ?? 'N/A',
-          'OwnerName': doc['ownerName'] ?? 'N/A',
-          'ContactNumber': doc['contactNumber'] ?? 'N/A',
-          'EmailAddress': doc['emailAddress'] ?? 'N/A',
-          'WebsiteURL': doc['websiteURL'] ?? '',
-          'Facebook': doc['facebook'] ?? '',
-          'Instagram': doc['instagram'] ?? '',
-          'City': doc['city'] ?? 'N/A',
-          'StateRegion': doc['stateRegion'] ?? 'N/A',
-          'Zipcode': doc['zipcode'] ?? 'N/A',
-          'Country': doc['country'] ?? 'N/A',
-          'LanguageSpoken': doc['languageSpoken'] ?? 'N/A',
-          'OperatingHours': doc['operatingHours'] ?? 'N/A',
-          'PaymentMethods': doc['paymentMethods'] ?? 'N/A',
-          'SpecialOffers': doc['specialOffers'] ?? 'N/A',
-          'VerificationStatus': doc['verificationStatus'] ?? 'N/A',
-        };
+      final favs = snapshot.docs.map((doc) {
+        return Business.fromJson(doc.data());
       }).toList();
 
-      favoriteList.value = favorites;
-      filteredfavList.value = favorites;
+      favoriteList.value = favs;
+      filteredfavList.value = favs;
     });
   }
 
@@ -154,24 +135,17 @@ class FavoriteController extends GetxController {
   }
 
   bool isFavorite(String name) {
-    return favorites.any((item) => item['name'] == name);
+    return favorites.any((item) => item.name == name);
   }
 
   void filterList(String query) {
     if (query.isEmpty) {
       filteredfavList.value = favoriteList;
     } else {
-      filteredfavList.value = favoriteList
-          .where((business) =>
-              business['Name']
-                  .toString()
-                  .toLowerCase()
-                  .contains(query.toLowerCase()) ||
-              business['Category']
-                  .toString()
-                  .toLowerCase()
-                  .contains(query.toLowerCase()))
-          .toList();
+      filteredfavList.value = favoriteList.where((business) {
+        return business.name.toLowerCase().contains(query.toLowerCase()) ||
+            business.category.toLowerCase().contains(query.toLowerCase());
+      }).toList();
     }
   }
 }

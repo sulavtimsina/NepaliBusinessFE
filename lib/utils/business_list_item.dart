@@ -3,91 +3,32 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:nepaliapp/controller/dashboard%20Controller/favorite_controller.dart';
+import 'package:nepaliapp/model/business.dart';
 import 'package:nepaliapp/routes/route_names.dart';
+import 'package:nepaliapp/utils/login_dialog.dart';
+
+import '../controller/authcontroller/auth_controller_state.dart';
 
 class BusinessListItem extends StatelessWidget {
-  final String name;
-  final String imageUrl;
-  final String category;
-  final String location;
-  final String description;
-  final double rating;
-  final String ownerName;
-  final String contactNumber;
-  final String emailAddress;
-  final String websiteURL;
-  final String facebook;
-  final String instagram;
-  final String city;
-  final String state;
-  final String zipCode;
-  final String country;
-  final String languageSpoken;
-  final String operatingHours;
-  final String paymentMethod;
-  final String specialOffers;
-  final String verificationStatus;
+  final Business business;
 
-  const BusinessListItem({
-    super.key,
-    required this.name,
-    required this.imageUrl,
-    required this.category,
-    required this.rating,
-    required this.location,
-    required this.description,
-    required this.ownerName,
-    required this.contactNumber,
-    required this.emailAddress,
-    required this.websiteURL,
-    required this.facebook,
-    required this.instagram,
-    required this.city,
-    required this.state,
-    required this.zipCode,
-    required this.country,
-    required this.languageSpoken,
-    required this.operatingHours,
-    required this.paymentMethod,
-    required this.specialOffers,
-    required this.verificationStatus,
-  });
+  const BusinessListItem({super.key, required this.business});
 
   @override
   Widget build(BuildContext context) {
     final FavoriteController favoritesController =
         Get.put(FavoriteController());
+    final AuthControllerState authController = Get.put(AuthControllerState());
 
     return ListTile(
       onTap: () {
-        Get.toNamed(RouteNames.bussinesdetailScreen, arguments: {
-          'imageUrl': imageUrl,
-          'name': name,
-          'categoryBusiness': category,
-          'location': location,
-          'description': description,
-          'rating': rating,
-          'ownerName': ownerName,
-          'contactNumber': contactNumber,
-          'emailAddress': emailAddress,
-          'websiteURL': websiteURL,
-          'facebook': facebook,
-          'instagram': instagram,
-          'city': city,
-          'stateRegion': state,
-          'zipcode': zipCode,
-          'country': country,
-          'languageSpoken': languageSpoken,
-          'operatingHours': operatingHours,
-          'paymentMethods': paymentMethod,
-          'specialOffers': specialOffers,
-          'verificationStatus': verificationStatus,
-        });
+        Get.toNamed(RouteNames.bussinesdetailScreen,
+            arguments: business.toJson());
       },
       leading: ClipRRect(
         borderRadius: BorderRadius.circular(8.r),
         child: CachedNetworkImage(
-          imageUrl: imageUrl,
+          imageUrl: business.imageUrl,
           width: 80.w,
           height: 80.h,
           fit: BoxFit.cover,
@@ -97,17 +38,17 @@ class BusinessListItem extends StatelessWidget {
           errorWidget: (context, url, error) => const Icon(Icons.error),
         ),
       ),
-      title: Text(name),
+      title: Text(business.name),
       subtitle: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(category),
+          Text(business.category),
           Row(
             children: List.generate(5, (index) {
-              if (index < rating.floor()) {
+              if (index < business.rating.floor()) {
                 // Full star
                 return const Icon(Icons.star, color: Colors.amber);
-              } else if (index < rating) {
+              } else if (index < business.rating) {
                 // Half star
                 return const Icon(Icons.star_half, color: Colors.amber);
               } else {
@@ -119,40 +60,24 @@ class BusinessListItem extends StatelessWidget {
         ],
       ),
       trailing: Obx(() {
-        final isFavorite = favoritesController.isFavorite(name);
+        final isFavorite = favoritesController.isFavorite(business.name);
         return IconButton(
           icon: Icon(
             isFavorite ? Icons.favorite : Icons.favorite_border,
             color: isFavorite ? Colors.red : Colors.grey,
           ),
           onPressed: () {
-            if (isFavorite) {
-              favoritesController.removeFromFavorites(name);
+            if (authController.firebaseUser.value != null) {
+              if (isFavorite) {
+                favoritesController.removeFromFavorites(business.name);
+              } else {
+                favoritesController.addToFavorites(business);
+              }
             } else {
-              final businessData = {
-                'name': name,
-                'imageUrl': imageUrl,
-                'category': category,
-                'location': location,
-                'description': description,
-                'rating': rating,
-                'ownerName': ownerName,
-                'contactNumber': contactNumber,
-                'emailAddress': emailAddress,
-                'websiteURL': websiteURL,
-                'facebook': facebook,
-                'instagram': instagram,
-                'city': city,
-                'stateRegion': state,
-                'zipcode': zipCode,
-                'country': country,
-                'languageSpoken': languageSpoken,
-                'operatingHours': operatingHours,
-                'paymentMethods': paymentMethod,
-                'specialOffers': specialOffers,
-                'verificationStatus': verificationStatus,
-              };
-              favoritesController.addToFavorites(businessData);
+              showDialog(
+                context: context,
+                builder: (BuildContext context) => const LoginDialog(),
+              );
             }
           },
         );
