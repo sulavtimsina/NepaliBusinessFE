@@ -8,6 +8,7 @@ class Utils {
   final standardColor = Colors.black;
   final navtextcolor = Colors.white;
   final tabBackgroundColor = Colors.grey.shade800;
+  final textColor = const Color(0xff003366);
 
   final String name = 'KhojBiz';
   String get greeting => "Welcome to $name";

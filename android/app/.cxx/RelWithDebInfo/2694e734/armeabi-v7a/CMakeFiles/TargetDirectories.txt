@@ -1,0 +1,2 @@
+E:/fiverr/nepaliapp/android/app/.cxx/RelWithDebInfo/2694e734/armeabi-v7a/CMakeFiles/edit_cache.dir
+E:/fiverr/nepaliapp/android/app/.cxx/RelWithDebInfo/2694e734/armeabi-v7a/CMakeFiles/rebuild_cache.dir

@@ -5,9 +5,14 @@ import 'package:get/get.dart';
 import 'package:nepaliapp/controller/authcontroller/login_controller.dart';
 import 'package:nepaliapp/utils/utils.dart';
 
-class Login extends StatelessWidget {
+class Login extends StatefulWidget {
   const Login({super.key});
 
+  @override
+  State<Login> createState() => _LoginState();
+}
+
+class _LoginState extends State<Login> {
   @override
   Widget build(BuildContext context) {
     final screenSize = MediaQuery.of(context).size;
@@ -20,6 +25,7 @@ class Login extends StatelessWidget {
         title: const Text('Login'),
         centerTitle: true,
         backgroundColor: utils.primaryColor,
+        automaticallyImplyLeading: false,
       ),
       body: SingleChildScrollView(
         child: Column(
@@ -147,21 +153,37 @@ class Login extends StatelessWidget {
                         Get.toNamed('/forgetScreen');
                       },
                       child: Text(
-                        'Forget Password?',
+                        'Forget Password',
                         style: TextStyle(
-                            fontSize: 16.sp, color: utils.secondaryColor),
+                          fontSize: 16.sp,
+                          color: utils.textColor,
+                          fontWeight: FontWeight.bold,
+                        ),
                       ),
                     ),
                     SizedBox(height: 12.h),
-                    InkWell(
-                      onTap: () {
-                        Get.toNamed('/registerScreen');
-                      },
-                      child: Text(
-                        'New Here? Register Now',
-                        style: TextStyle(
-                            fontSize: 16.sp, color: utils.secondaryColor),
-                      ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(
+                          'New Here? ',
+                          style:
+                              TextStyle(fontSize: 16.sp, color: Colors.black),
+                        ),
+                        InkWell(
+                          onTap: () {
+                            Get.toNamed('/registerScreen');
+                          },
+                          child: Text(
+                            'Register Now',
+                            style: TextStyle(
+                              fontSize: 16.sp,
+                              color: utils.textColor,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ),
+                      ],
                     ),
                     SizedBox(height: 14.h),
                     Center(

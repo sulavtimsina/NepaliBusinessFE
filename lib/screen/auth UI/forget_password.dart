@@ -5,9 +5,14 @@ import 'package:get/get.dart';
 import 'package:nepaliapp/controller/authcontroller/reset_password_controller.dart';
 import 'package:nepaliapp/utils/utils.dart';
 
-class ForgetPassword extends StatelessWidget {
+class ForgetPassword extends StatefulWidget {
   const ForgetPassword({super.key});
 
+  @override
+  State<ForgetPassword> createState() => _ForgetPasswordState();
+}
+
+class _ForgetPasswordState extends State<ForgetPassword> {
   @override
   Widget build(BuildContext context) {
     final screenSize = MediaQuery.of(context).size;
@@ -98,15 +103,28 @@ class ForgetPassword extends StatelessWidget {
                       ),
                     ),
                     SizedBox(height: 16.h),
-                    InkWell(
-                      onTap: () {
-                        Get.toNamed('/registerScreen');
-                      },
-                      child: Text(
-                        'New Here? Register Now',
-                        style: TextStyle(
-                            fontSize: 16.sp, color: utils.secondaryColor),
-                      ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(
+                          'New Here? ',
+                          style:
+                              TextStyle(fontSize: 16.sp, color: Colors.black),
+                        ),
+                        InkWell(
+                          onTap: () {
+                            Get.toNamed('/registerScreen');
+                          },
+                          child: Text(
+                            'Register Now',
+                            style: TextStyle(
+                              fontSize: 16.sp,
+                              color: utils.textColor,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ),
+                      ],
                     ),
                     SizedBox(
                       height: 20.h,

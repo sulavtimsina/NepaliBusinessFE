@@ -5,9 +5,14 @@ import 'package:get/get.dart';
 import 'package:nepaliapp/controller/authcontroller/register_controller.dart';
 import 'package:nepaliapp/utils/utils.dart';
 
-class RegisterScreen extends StatelessWidget {
+class RegisterScreen extends StatefulWidget {
   const RegisterScreen({super.key});
 
+  @override
+  State<RegisterScreen> createState() => _RegisterScreenState();
+}
+
+class _RegisterScreenState extends State<RegisterScreen> {
   @override
   Widget build(BuildContext context) {
     final screenSize = MediaQuery.of(context).size;
@@ -20,6 +25,7 @@ class RegisterScreen extends StatelessWidget {
         title: const Text('Register'),
         centerTitle: true,
         backgroundColor: utils.primaryColor,
+        automaticallyImplyLeading: false,
       ),
       body: SingleChildScrollView(
         child: Column(
@@ -171,15 +177,28 @@ class RegisterScreen extends StatelessWidget {
                           );
                         })),
                     SizedBox(height: 16.h),
-                    InkWell(
-                      onTap: () {
-                        Get.toNamed('/loginScreen');
-                      },
-                      child: Text(
-                        'Already Have Account? Login',
-                        style: TextStyle(
-                            fontSize: 16.sp, color: utils.secondaryColor),
-                      ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(
+                          'Already Have Account? ',
+                          style:
+                              TextStyle(fontSize: 16.sp, color: Colors.black),
+                        ),
+                        InkWell(
+                          onTap: () {
+                            Get.toNamed('/loginScreen');
+                          },
+                          child: Text(
+                            'Login',
+                            style: TextStyle(
+                              fontSize: 16.sp,
+                              color: utils.textColor,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ),
+                      ],
                     ),
                     SizedBox(height: 10.h),
                     Center(

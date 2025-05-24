@@ -50,7 +50,7 @@ class Business {
       name: json['Name'] ?? '',
       imageUrl: json['ImageUrl'] ?? '',
       category: json['Category'] ?? '',
-    rating: double.tryParse(json['Rating'].toString()) ?? 0.0,
+      rating: double.tryParse(json['Rating'].toString()) ?? 0.0,
       location: json['Location'] ?? '',
       description: json['Description'] ?? '',
       ownerName: json['OwnerName'] ?? '',

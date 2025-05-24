@@ -54,7 +54,7 @@ class CategoryDetailBuz extends StatelessWidget {
 
               return ListView.separated(
                 itemBuilder: (context, index) {
-                  final Business business =filteredBusinesses[index]  ;
+                  final Business business = filteredBusinesses[index];
                   return BusinessListItem(business: business);
                 },
                 separatorBuilder: (context, index) => const Divider(),

@@ -16,7 +16,6 @@ class Home extends StatelessWidget {
         Get.put(NavigationController());
     AuthControllerState authControllerState = Get.put(AuthControllerState());
 
-
     final Utils utils = Utils();
     return Scaffold(
       appBar: AppBar(
@@ -24,13 +23,15 @@ class Home extends StatelessWidget {
         backgroundColor: utils.primaryColor,
         centerTitle: true,
         automaticallyImplyLeading: false,
-        actions: [
-          IconButton(icon: const Icon(Icons.logout),
-            tooltip: 'Logout',
-            onPressed: () =>authControllerState.signOut())
-        ],
+        actions: authControllerState.firebaseUser.value != null
+            ? [
+                IconButton(
+                    icon: const Icon(Icons.logout),
+                    tooltip: 'Logout',
+                    onPressed: () => authControllerState.signOut())
+              ]
+            : [],
       ),
-
       body: SafeArea(
         child: Obx(() {
           return Padding(
